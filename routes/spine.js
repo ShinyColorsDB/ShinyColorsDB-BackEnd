@@ -14,4 +14,8 @@ spine.get("/idolList.json", (req, res, next) => {
     });
 });
 
+spine.get("/", (req, res, next) => {
+    res.send("test");
+});
+
 module.exports = spine;
