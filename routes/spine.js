@@ -4,7 +4,7 @@ const mysql2 = require('mysql2');
 const config = require('../config.json');
 const conn = mysql2.createConnection(config);
 
-spine.get("/idolList.json", (req, res, next) => {
+spine.get("/idolList", (req, res, next) => {
     let data = new Array();
     conn.query("SELECT `IdolID`, `NickName`, `IdolName` FROM `1-Idols`", (err, result) => {
         result.forEach(element => {
@@ -13,6 +13,17 @@ spine.get("/idolList.json", (req, res, next) => {
         res.send(data);
     });
 });
+
+spine.get("/dressList/:IdolID", (req, res, next) => {
+    let data = new Array();
+    conn.query("SELECT * FROM `20-IdolDresses` WHERE `IdolID` = ? AND `Exist` = 1 ORDER BY FIELD (`DressType`, \"P_SSR\", \"P_SR\", \"Special\")", [req.params.IdolID], (err, result) => {
+        res.send(result);
+    });
+});
+
+spine.get("typeList/:DressIndex", (req, res, next) => {
+
+})
 
 spine.get("/", (req, res, next) => {
     res.send("test");
