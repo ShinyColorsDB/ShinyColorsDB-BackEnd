@@ -16,7 +16,7 @@ spine.get("/idolList", (req, res, next) => {
 
 spine.get("/dressList/:IdolID", (req, res, next) => {
     let data = new Array();
-    conn.query("SELECT * FROM `20-IdolDresses` WHERE `IdolID` = ? AND `Exist` = 1 ORDER BY FIELD (`DressType`, \"P_SSR\", \"P_SR\", \"Anniversary\", \"Special\")", [req.params.IdolID], (err, result) => {
+    conn.query("SELECT * FROM `20-IdolDresses` WHERE `IdolID` = ? AND `Exist` = 1 ORDER BY FIELD (`DressType`, \"P_SSR\", \"P_SR\", \"Anniversary\", \"Special\"), `DressIndex`", [req.params.IdolID], (err, result) => {
         res.send(result);
     });
 });
