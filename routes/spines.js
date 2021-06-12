@@ -5,6 +5,7 @@ const config = require('../config.json');
 const conn = mysql2.createConnection(config);
 
 spines.get("/idolList", (req, res, next) => {
+    console.log(req.get("x-forwarded-for"));
     let data = new Array();
     conn.query("SELECT `IdolID`, `NickName`, `IdolName` FROM `1-Idols`", (err, result) => {
         result.forEach(element => {
