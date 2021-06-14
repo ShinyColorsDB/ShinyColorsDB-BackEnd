@@ -51,7 +51,7 @@ function DBGetIdolInfo(IdolID) {
     return new Promise((res, rej) => {
         conn.execute("SELECT * FROM `1-Idols` WHERE `IdolID` = ? LIMIT 1", [IdolID], (err, result) => {
             if (err) throw err;
-            res(result);
+            res(result[0]);
         });
     });
 }
