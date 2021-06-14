@@ -31,7 +31,7 @@ general.get("/getIdolUnitList", async(req, res, next) => {
 });
 
 general.get("/getIdolInfo/:IdolID", async(req, res, next) => {
-    const IdolInfo = await DBGetIdolInfo();
+    const IdolInfo = await DBGetIdolInfo(req.params.IdolID);
 
     res.send(IdolInfo);
 });
