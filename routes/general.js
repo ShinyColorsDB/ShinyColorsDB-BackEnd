@@ -30,11 +30,26 @@ general.get("/getIdolUnitList", async(req, res, next) => {
     res.send(Obj);
 });
 
+general.get("/getIdolInfo/:IdolID", async(req, res, next) => {
+    const IdolInfo = await DBGetIdolInfo();
+
+    res.send(IdolInfo);
+});
+
 module.exports = general;
 
 function DBGetIdolList() {
     return new Promise((res, rej) => {
         conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, b.`UnitHiragana` FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`", (err, result) => {
+            if (err) throw err;
+            res(result);
+        });
+    });
+}
+
+function DBGetIdolInfo(IdolID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT * FROM `1-Idols` WHERE `IdolID` = ?", [IdolID], (err, result) => {
             if (err) throw err;
             res(result);
         });
