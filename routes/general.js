@@ -49,7 +49,7 @@ function DBGetIdolList() {
 
 function DBGetIdolInfo(IdolID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `1-Idols` AS a `2-Units` AS b WHERE a.`IdolID` = ? AND a.UnitID = b.UnitID LIMIT 1", [IdolID], (err, result) => {
+        conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`IdolID` = ? AND a.`UnitID` = b.`UnitID` LIMIT 1", [IdolID], (err, result) => {
             if (err) throw err;
             res(result[0]);
         });
