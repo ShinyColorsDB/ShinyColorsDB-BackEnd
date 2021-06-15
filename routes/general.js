@@ -33,6 +33,9 @@ general.get("/getIdolUnitList", async(req, res, next) => {
 general.get("/getIdolInfo/:IdolID", async(req, res, next) => {
     const IdolInfo = await DBGetIdolInfo(req.params.IdolID);
 
+    const CardInfo = await DBGetCardList(req.params.IdolID);
+
+    IdolInfo.CardInfo = CardInfo;
     res.send(IdolInfo);
 });
 
@@ -52,6 +55,15 @@ function DBGetIdolInfo(IdolID) {
         conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`IdolID` = ? AND a.`UnitID` = b.`UnitID` LIMIT 1", [IdolID], (err, result) => {
             if (err) throw err;
             res(result[0]);
+        });
+    });
+}
+
+function DBGetCardList(IdolID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT * FROM `3-IdolCards` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardID`", [IdolID], (err, result) => {
+            if (err) throw err;
+            res(result);
         });
     });
 }
