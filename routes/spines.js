@@ -2,7 +2,11 @@ const express = require('express');
 const spines = express.Router();
 const mysql2 = require('mysql2');
 const config = require('../config.json');
-const conn = mysql2.createConnection(config);
+let conn = mysql2.createConnection(config);
+
+conn.on("error", () => {
+    conn = mysql2.createConnection(config);
+});
 
 spines.get("/idolList", (req, res, next) => {
     console.log(req.get("x-forwarded-for"));
