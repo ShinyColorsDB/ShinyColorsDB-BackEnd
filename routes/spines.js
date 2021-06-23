@@ -1,7 +1,6 @@
 const express = require('express');
 const spines = express.Router();
-const mysql2 = require('mysql2');
-const config = require('../config.json');
+
 let conn = require('../db/db.js');
 
 spines.get("/idolList", (req, res, next) => {

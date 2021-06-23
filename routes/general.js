@@ -1,7 +1,6 @@
 const express = require('express');
 const general = express.Router();
-const mysql2 = require('mysql2');
-const config = require('../config.json');
+
 const conn = require('../db/db.js');
 
 general.get("/getIdolUnitList", async(req, res, next) => {
