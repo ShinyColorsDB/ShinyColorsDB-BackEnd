@@ -2,16 +2,7 @@ const express = require('express');
 const general = express.Router();
 const mysql2 = require('mysql2');
 const config = require('../config.json');
-let conn = mysql2.createConnection(config);
-
-conn.on("error", (err) => {
-    if (err.code == 'PROTOCOL_CONNECTION_LOST' || err.code == 'PROTOCOL_UNEXPECTED_PACKET') {
-        conn = mysql2.createConnection(config)
-    } else {
-        conn = null;
-        throw err;
-    }
-});
+const conn = require('../db/db.js');
 
 general.get("/getIdolUnitList", async(req, res, next) => {
     console.log(req.get("x-forwarded-for"));
