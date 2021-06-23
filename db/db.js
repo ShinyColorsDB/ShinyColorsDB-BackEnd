@@ -7,8 +7,10 @@ function handleDisconnect() {
     conn = mysql2.createConnection(config);
 
     conn.connect((err) => {
-        console.log("error connecting to db: ", err);
-        setTimeout(handleDisconnect, 2000);
+        if(err) {
+            console.log("error connecting to db: ", err);
+            setTimeout(handleDisconnect, 2000);
+        }
     });
 
     conn.on("error", (err) => {
