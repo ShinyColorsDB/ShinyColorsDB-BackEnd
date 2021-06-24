@@ -42,7 +42,7 @@ module.exports = general;
 
 function DBGetIdolList() {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, b.`UnitHiragana` FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`", (err, result) => {
+        conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, b.`UnitHiragana` FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`",[] , (err, result) => {
             if (err) throw err;
             res(result);
         });
