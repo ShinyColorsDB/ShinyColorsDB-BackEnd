@@ -29,13 +29,17 @@ general.get("/getIdolUnitList", async(req, res, next) => {
     res.send(Obj);
 });
 
-general.get("/getIdolInfo/:IdolID", async(req, res, next) => {
+general.get("/getIdolInfo/:IdolID", async (req, res, next) => {
     const IdolInfo = await DBGetIdolInfo(req.params.IdolID);
 
     const CardInfo = await DBGetCardList(req.params.IdolID);
 
     IdolInfo.CardInfo = CardInfo;
     res.send(IdolInfo);
+});
+
+general.get("getPCardInfo", async (req, res, next) => {
+    res.send(req.query.cardUUID);
 });
 
 module.exports = general;
