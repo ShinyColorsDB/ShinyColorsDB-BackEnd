@@ -38,7 +38,7 @@ general.get("/getIdolInfo/:IdolID", async (req, res, next) => {
     res.send(IdolInfo);
 });
 
-general.get("getPCardInfo", async (req, res, next) => {
+general.get("/getPCardInfo", async (req, res, next) => {
     res.send(req.query.cardUUID);
 });
 
