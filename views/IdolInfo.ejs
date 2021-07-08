@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="h-100 w-100" lang="zh-Hant-tw">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://shinycolors.moe/bootstrap/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://shinycolors.moe/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.shinycolors.moe">
+    <meta property="og:title" content="ShinyColors Database zh-tw">
+    <meta property="og:description" content="A fan made ShinyColors Database. Please contact euphokumiko.iem06@nctu.edu.tw if you're insteresting in building ShinyColorsDB together :)">
+    <meta property="og:image" content="https://www.shinycolors.moe/283_192x192.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.shinycolors.moe">
+    <meta property="twitter:title" content="ShinyColors Database zh-tw">
+    <meta property="twitter:description" content="A fan made ShinyColors Database. Please contact euphokumiko.iem06@nctu.edu.tw if you're insteresting in building ShinyColorsDB together :)">
+    <meta property="twitter:image" content="https://www.shinycolors.moe/283_192x192.png">
+
+    <script src="/javascript/IdolInfo.js"></script>
+    <!--link rel="stylesheet" href="./PCardViewer.css"-->
+</head>
+
+<body class="h-100" onload="Main();">
+    <div class="container-fluid d-flex p-0 h-100">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-md-2 col-sm-12" id="divSidebar">
+            <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg" data-toggle="collapse" data-target="#divMainList">首頁</a>
+            <div class="list-group well overflow-auto custom-scroll collapse" id="divMainList">
+                <a href="/" class="list-group-item">ShinyColorsDB</a>
+                <a href="#" class="list-group-item">最新情報</a>
+                <a href="#" class="list-group-item">無限期招募前端大師= =</a>
+            </div>
+
+            <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded" data-toggle="collapse" data-target="#divIdolUnitList">角色列表</a>
+            <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
+                <% for(let i = 0; i < IdolList.length; i++) { %>
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target=<%= `#unit${i + 1}` %>>
+                        <i class="glyphicon glyphicon-chevron-right"></i><%= IdolList[i].UnitName %>
+                    </a>
+                    <div class="
+                    <% if(i + 1 == IdolInfo.UnitID) { %> 
+                        list-group
+                    <% } else { %> 
+                        list-group collapse
+                    <% } %>"
+                        id=<%= `unit${i + 1}` %>>
+                        <% for(let k = 0; k < IdolList[i].Idols.length; k++) { %>
+                            <a href=<%= `/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %> 
+                                class=" <% if(IdolList[i].Idols[k].IdolID == IdolInfo.IdolID) { %> 
+                                            list-group-item active
+                                        <% } else { %> 
+                                            list-group-item
+                                        <% } %>"> 
+                                <%= IdolList[i].Idols[k].IdolName %>
+                            </a>
+                        <% } %>
+                    </div>
+                <% } %>
+                
+            </div>
+            <a href="https://spine.shinycolors.moe" class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg">服裝Live2d~~</a>
+        </div>
+        <div class="d-flex flex-column flex-shrink-0 p-3 d-inline-block col-md-4 col-sm-12 h-100 mx-auto" id="divImg">
+            <img src=<%= Img.ImgPrivate %> alt="" class="img-fluid" id="imgP">
+            <img src=<%= Img.ImgLive %> alt="" class="d-none img-fluid" id="imgL">
+            <img src=<%= Img.ImgTsubasa %> alt="" class="d-none img-fluid" id="imgS">
+            <input type="button" value="下一張~~" class="mt-3 w-50 mx-auto" onclick="ChangeTachie()">
+        </div>
+        <!---KRAZ好婆喔KRAZ--->
+        <div class="d-flex flex-column flex-shrink-0 p-3 d-inline-block col-md-6 col-sm-12 h-100" id="divInfo">
+            <div class="row d-flex w-100 mx-auto h-100">
+                <div class="d-flex w-100 h-40" id="idolInfo">
+                    <table class="table d-inline-block w-100">
+                        <tbody class="w-100">
+                            <tr>
+                                <td scope="row" class="col-md-1">姓名</td>
+                                <td class="col-md-3"><%= IdolInfo.IdolName %></td>
+                                <td scope="row" class="col-md-1">生日</td>
+                                <td class="col-md-3"><%= IdolInfo.Birthday %></td>
+                                <td scope="row" class="col-md-1">慣用手</td>
+                                <td class="col-md-3"><%= IdolInfo.UsedHand %></td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="col-md-1"></td>
+                                <td class="col-md-3"><%= IdolInfo.Hiragana %></td>
+                                <td scope="row" class="col-md-1">星座</td>
+                                <td class="col-md-3"><%= IdolInfo.StarSign %></td>
+                                <td scope="row" class="col-md-1">靈感</td>
+                                <td class="col-md-3"><%= IdolInfo.Hirameki %></td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="col-md-1">團體</td>
+                                <td class="col-md-3"><%= IdolInfo.UnitName %></td>
+                                <td scope="row" class="col-md-1">興趣</td>
+                                <td class="col-md-3"><%= IdolInfo.Interest %></td>
+                                <td scope="row" class="col-md-1">代表色</td>
+                                <td class="col-md-3">
+                                    <div class="color-box d-inline-block" id="idolColorBox"
+                                        <% if(IdolInfo) { %>
+                                            style = background-color:<%= IdolInfo.Color1 %>;height:10px;width:10px;
+                                        <% } %>
+                                    ></div>
+                                    <div class="d-inline-block"><%= IdolInfo.Color1 %></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="col-md-1">年齡</td>
+                                <td class="col-md-3"><%= IdolInfo.Age %></td>
+                                <td scope="row" class="col-md-1">特技</td>
+                                <td class="col-md-3"><%= IdolInfo.SpecialSkill %></td>
+                                <td class="col-md-4" colspan="2" rowspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="col-md-1">身高</td>
+                                <td class="col-md-3"><%= IdolInfo.Height + "公分" %></td>
+                                <td scope="row" class="col-md-1">血型</td>
+                                <td class="col-md-3"><%= IdolInfo.BloodType %></td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="col-md-1">體重</td>
+                                <td class="col-md-3"><%= IdolInfo.Weight + "公斤"%></td>
+                                <td scope="row" class="col-md-1">出生地</td>
+                                <td class="col-md-3"><%= IdolInfo.BirthPlace %></td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="col-md-1">三圍</td>
+                                <td class="col-md-3"><%= IdolInfo.ThreeSize %></td>
+                                <td scope="row" class="col-md-1">CV</td>
+                                <td class="col-md-3"><%= IdolInfo.CV %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card text-center w-100 h-60" id="idolCards">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active disabled" href="javascript: void(0)" id="PList">P卡列表</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript: void(0)" id="SList">S卡列表</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!---土屋李央好可愛喔李央--->
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="javascript: void(0)" id="SSRList">SSR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript: void(0)" id="SRList">SR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript: void(0)" id="RList">R</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="javascript: void(0)" id="NList">N</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body d-flex pl-0 pr-0">
+                        <!--h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p-->
+                        <div class="w-50 col-md-4 d-inline-block">
+                            <h5 class="text-left" id="cardTypeTitle">P-SSR</h5>
+                            <ul class="text-left list-group overflow-auto" id="PSSRCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.PSSR.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.PSSR[k].BigPic1}\");changeCardLink(\"/info/PCardInfo?UUID=${CardInfo.PSSR[k].CardUUID}\",\"${CardInfo.PSSR[k].CardName}\");` %>><%= CardInfo.PSSR[k].CardName %></a></li>
+                                <% } %>
+                                <!--li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【アイドルロード】櫻木真乃</a></li>
+                                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ほわっとスマイル】櫻木真乃</a></li>
+                                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ハ♡トフェルトゥギフト】櫻木真乃</a></li>
+                                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【はじけてスマイル】櫻木真乃</a></li>
+                                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【深染め、いろみぐさ】櫻木真乃</a></li>
+                                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ソラを跳ね】櫻木真乃</a></li-->
+                            </ul>
+                            <ul class="text-left list-group d-none overflow-auto" id="PSRCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.PSR.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.PSR[k].BigPic1}\");changeCardLink(\"/info/PCardInfo?UUID=${CardInfo.PSR[k].CardUUID}\",\"${CardInfo.PSR[k].CardName}\");` %>><%= CardInfo.PSR[k].CardName %></a></li>
+                                <% } %>
+                            </ul>
+                            <ul class="text-left list-group d-none overflow-auto" id="PRCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.PR.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.PR[k].BigPic1}\");changeCardLink(\"/info/PCardInfo?UUID=${CardInfo.PR[k].CardUUID}\",\"${CardInfo.PR[k].CardName}\");` %>><%= CardInfo.PR[k].CardName %></a></li>
+                                <% } %>
+                            </ul>
+                            <ul class="text-left list-group d-none overflow-auto" id="SSSRCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.SSSR.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.SSSR[k].BigPic1}\");changeCardLink(\"/info/SCardInfo?UUID=${CardInfo.SSSR[k].CardUUID}\",\"${CardInfo.SSSR[k].CardName}\");` %>><%= CardInfo.SSSR[k].CardName %></a></li>
+                                <% } %>
+                            </ul>
+                            <ul class="text-left list-group d-none overflow-auto" id="SSRCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.SSR.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.SSR[k].BigPic1}\");changeCardLink(\"/info/SCardInfo?UUID=${CardInfo.SSR[k].CardUUID}\",\"${CardInfo.SSR[k].CardName}\");` %>><%= CardInfo.SSR[k].CardName %></a></li>
+                                <% } %>
+                            </ul>
+                            <ul class="text-left list-group d-none overflow-auto" id="SRCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.SR.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.SR[k].BigPic1}\");changeCardLink(\"/info/SCardInfo?UUID=${CardInfo.SR[k].CardUUID}\",\"${CardInfo.SR[k].CardName}\");` %>><%= CardInfo.SR[k].CardName %></a></li>
+                                <% } %>
+                            </ul>
+                            <ul class="text-left list-group d-none overflow-auto" id="SNCardList" style="font-family: Meiryo; list-style-type: none;">
+                                <% for(let k = 0; k < CardInfo.SN.length; k++) { %>
+                                    <li><a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item" onclick=<%= `changePicture(\"${CardInfo.SN[k].BigPic1}\");changeCardLink(\"/info/SCardInfo?UUID=${CardInfo.SN[k].CardUUID}\",\"${CardInfo.SN[k].CardName}\");` %>><%= CardInfo.SN[k].CardName %></a></li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class="w-50 col-md-8 d-inline-block mh-100">
+                            <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.PSSR[0].BigPic1 %>" alt="" class="img-fluid" id="cardPicture">
+                            <a href="<%= `/info/PCardInfo?UUID=${CardInfo.PSSR[0].CardUUID}` %>" class="text-center" id="cardInfoLink"><%=CardInfo.PSSR[0].CardName%></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

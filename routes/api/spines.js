@@ -1,7 +1,7 @@
 const express = require('express');
 const spines = express.Router();
 
-let conn = require('../db/db.js');
+let conn = require('../../db/db');
 
 spines.get("/idolList", (req, res, next) => {
     console.log(req.get("x-forwarded-for"));

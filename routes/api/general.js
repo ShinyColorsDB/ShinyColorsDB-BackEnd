@@ -1,7 +1,7 @@
 const express = require('express');
 const general = express.Router();
 
-const conn = require('../db/db.js');
+const conn = require('../../db/db.js');
 
 general.get("/getIdolUnitList", async(req, res, next) => {
     console.log(req.get("x-forwarded-for"));
@@ -41,6 +41,7 @@ general.get("/getIdolInfo/:IdolID", async (req, res, next) => {
 general.get("/getPCardInfo", async (req, res, next) => {
     res.send(req.query.cardUUID);
 });
+
 
 module.exports = general;
 

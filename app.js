@@ -4,8 +4,9 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-const spineRouter = require('./routes/spines.js');
-const generalRouter = require('./routes/general.js');
+const spineRouter = require('./routes/api/spines.js');
+const generalRouter = require('./routes/api/general.js');
+const infoRouter = require('./routes/info/info.js');
 
 let app = express();
 
@@ -14,8 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.set('view engine', 'ejs');
+app.use('/javascript', express.static('javascript'));
+
 app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
+app.use("/info", infoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
