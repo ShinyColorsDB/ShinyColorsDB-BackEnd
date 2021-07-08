@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
-app.use('/javascript', express.static('javascript'));
+app.use('/static', express.static('static'));
 
 app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
