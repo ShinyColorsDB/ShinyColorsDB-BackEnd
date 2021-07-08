@@ -12,20 +12,19 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.shinycolors.moe">
+    <meta property="og:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="og:title" content="ShinyColors Database zh-tw">
     <meta property="og:description" content="A fan made ShinyColors Database. Please contact euphokumiko.iem06@nctu.edu.tw if you're insteresting in building ShinyColorsDB together :)">
-    <meta property="og:image" content="https://www.shinycolors.moe/283_192x192.png">
+    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.PSSR.slice(-1)[0].BigPic1 %>">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.shinycolors.moe">
+    <meta property="twitter:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="twitter:title" content="ShinyColors Database zh-tw">
     <meta property="twitter:description" content="A fan made ShinyColors Database. Please contact euphokumiko.iem06@nctu.edu.tw if you're insteresting in building ShinyColorsDB together :)">
-    <meta property="twitter:image" content="https://www.shinycolors.moe/283_192x192.png">
+    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.PSSR.slice(-1)[0].BigPic1 %>">
 
     <script src="/static/javascript/IdolInfo.js"></script>
-    <!--link rel="stylesheet" href="./PCardViewer.css"-->
 </head>
 
 <body class="h-100" onload="Main();">
@@ -54,9 +53,9 @@
                         <% for(let k = 0; k < IdolList[i].Idols.length; k++) { %>
                             <a href=<%= `/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %> 
                                 class=" <% if(IdolList[i].Idols[k].IdolID == IdolInfo.IdolID) { %> 
-                                            list-group-item active
+                                            list-group-item active pl-4
                                         <% } else { %> 
-                                            list-group-item
+                                            list-group-item pl-4
                                         <% } %>"> 
                                 <%= IdolList[i].Idols[k].IdolName %>
                             </a>
