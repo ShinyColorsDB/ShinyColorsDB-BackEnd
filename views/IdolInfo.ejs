@@ -156,16 +156,16 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active cardRarity" href="javascript: void(0)" id="SSRList" data-cardRarity="SSRCardList">SSR</a>
+                                <a class="nav-link active cardRarity" href="javascript: void(0)" id="SSRList" data-cardRarity="SSRCardList" data-title="SSR">SSR</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link cardRarity" href="javascript: void(0)" id="SRList" data-cardRarity="SRCardList">SR</a>
+                                <a class="nav-link cardRarity" href="javascript: void(0)" id="SRList" data-cardRarity="SRCardList" data-title="SR">SR</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link cardRarity" href="javascript: void(0)" id="RList" data-cardRarity="RCardList">R</a>
+                                <a class="nav-link cardRarity" href="javascript: void(0)" id="RList" data-cardRarity="RCardList" data-title="R">R</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled cardRarity" href="javascript: void(0)" id="NList" data-cardRarity="NCardList">N</a>
+                                <a class="nav-link disabled cardRarity" href="javascript: void(0)" id="NList" data-cardRarity="NCardList" data-title="N">N</a>
                             </li>
                         </ul>
                     </div>
@@ -177,7 +177,7 @@
                             <ul class="text-left list-group overflow-auto cardList" id="PSSRCardList">
                                 <% for(let k = 0; k < CardInfo.PSSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.PSSR[k].BigPic1 %> data-carduuid=<%= CardInfo.PSSR[k].CardUUID %> data-cardname=<%= CardInfo.PSSR[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.PSSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.PSSR[k].CardUUID %>" data-cardname="<%= CardInfo.PSSR[k].CardName %>">
                                             <%= CardInfo.PSSR[k].CardName %>
                                         </a>
                                     </li>
@@ -192,7 +192,7 @@
                             <ul class="text-left list-group d-none overflow-auto cardList" id="PSRCardList">
                                 <% for(let k = 0; k < CardInfo.PSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.PSR[k].BigPic1 %> data-carduuid=<%= CardInfo.PSR[k].CardUUID %> data-cardname=<%= CardInfo.PSR[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.PSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.PSR[k].CardUUID %>" data-cardname="<%= CardInfo.PSR[k].CardName %>">
                                             <%= CardInfo.PSR[k].CardName %>
                                         </a>
                                     </li>
@@ -201,7 +201,7 @@
                             <ul class="text-left list-group d-none overflow-auto cardList" id="PRCardList">
                                 <% for(let k = 0; k < CardInfo.PR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.PR[k].BigPic1 %> data-carduuid=<%= CardInfo.PR[k].CardUUID %> data-cardname=<%= CardInfo.PR[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.PR[k].BigPic1 %>" data-carduuid="<%= CardInfo.PR[k].CardUUID %>" data-cardname="<%= CardInfo.PR[k].CardName %>">
                                             <%= CardInfo.PR[k].CardName %>
                                         </a>
                                     </li>
@@ -210,7 +210,7 @@
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SSSRCardList">
                                 <% for(let k = 0; k < CardInfo.SSSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.SSSR[k].BigPic1 %> data-carduuid=<%= CardInfo.SSSR[k].CardUUID %> data-cardname=<%= CardInfo.SSSR[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SSSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.SSSR[k].CardUUID %>" data-cardname="<%= CardInfo.SSSR[k].CardName %>">
                                             <%= CardInfo.SSSR[k].CardName %>
                                         </a>
                                     </li>
@@ -219,7 +219,7 @@
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SSRCardList">
                                 <% for(let k = 0; k < CardInfo.SSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.SSR[k].BigPic1 %> data-carduuid=<%= CardInfo.SSR[k].CardUUID %> data-cardname=<%= CardInfo.SSR[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.SSR[k].CardUUID %>" data-cardname="<%= CardInfo.SSR[k].CardName %>">
                                             <%= CardInfo.SSR[k].CardName %>
                                         </a>
                                     </li>
@@ -228,7 +228,7 @@
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SRCardList">
                                 <% for(let k = 0; k < CardInfo.SR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.SR[k].BigPic1 %> data-carduuid=<%= CardInfo.SR[k].CardUUID %> data-cardname=<%= CardInfo.SR[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SR[k].BigPic1 %>" data-carduuid="<%= CardInfo.SR[k].CardUUID %>" data-cardname="<%= CardInfo.SR[k].CardName %>">
                                             <%= CardInfo.SR[k].CardName %>
                                         </a>
                                     </li>
@@ -237,7 +237,7 @@
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SNCardList">
                                 <% for(let k = 0; k < CardInfo.SN.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture=<%= CardInfo.SN[k].BigPic1 %> data-carduuid=<%= CardInfo.SN[k].CardUUID %> data-cardname=<%= CardInfo.SN[k].CardName %>>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SN[k].BigPic1 %>" data-carduuid="<%= CardInfo.SN[k].CardUUID %>" data-cardname="<%= CardInfo.SN[k].CardName %>">
                                             <%= CardInfo.SN[k].CardName %>
                                         </a>
                                     </li>

@@ -15,6 +15,7 @@ $(function() {
         $(".cardList").addClass("d-none");
         $(".cardRarity").removeClass("active disabled");
         $("#SSRList").addClass("active disabled");
+        $("#cardTypeTitle").text(`${$(this).attr("data-cardType")}-SSR`);
         
         if($(this).attr("data-cardType") == "P"){
             $("#NList").addClass("disabled");
@@ -32,10 +33,15 @@ $(function() {
         $(".cardRarity").removeClass("active disabled");
         $(this).addClass("active disabled");
 
+        if($(".cardType.active.disabled").attr("data-cardType") == "P") {
+            $("#NList").addClass("disabled");
+        }
+
         let type = $(".active.cardType").attr("data-cardType");
         let rari = $(".active.cardRarity").attr("data-cardRarity");
         $(".cardList").addClass("d-none");
         $(`#${type}${rari}`).removeClass("d-none");
+        $("#cardTypeTitle").text(`${type}-${$(this).attr("data-title")}`);
     });
 
     $("#nextTachie").click(function() {
