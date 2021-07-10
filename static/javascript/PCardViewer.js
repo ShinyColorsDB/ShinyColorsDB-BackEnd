@@ -246,12 +246,13 @@ function SetupTypeList() {
     typeList.onchange = () => {
         dressType = typeList.value;
 
+        ClearDragStatus();
+
         pathTexture = [path, document.getElementById("typeList").value, "data.png"].join("/");
         pathAtlas = [path, document.getElementById("typeList").value, "data.atlas"].join("/");
         pathJSON = [path, document.getElementById("typeList").value, "data.json"].join("/");
         console.log(pathTexture, pathAtlas, pathJSON);
 
-        ClearDragStatus();
         requestAnimationFrame(LoadAsset);
     };
 
