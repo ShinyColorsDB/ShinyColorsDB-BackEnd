@@ -135,7 +135,7 @@ function DBGetPCardPanel(CardUUID) {
 
 function DBGetPCardInfo(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.*, b.DressUUID FROM `3-IdolCards` AS a, `20-IdolDresses` AS b WHERE a.CardUUID = ? AND a.DressIndex = b.DressIndex;", 
+        conn.execute("SELECT a.*, b.DressUUID, b.Exist AS `DressExist` FROM `3-IdolCards` AS a, `20-IdolDresses` AS b WHERE a.CardUUID = ? AND a.DressIndex = b.DressIndex;", 
         [CardUUID], 
         (err, result) => {
             res(result[0]);

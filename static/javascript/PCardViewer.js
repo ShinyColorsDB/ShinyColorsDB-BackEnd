@@ -11,7 +11,7 @@ let shapes;
 let path;
 let pathJSON;
 let pathAtlas;
-let pathTexture = "https://static.shinycolors.moe/spines/toru/03da55fe-7e0b-416d-af6b-5639452aa90c/big_cloth0/data.png";
+let pathTexture;
 
 let asset = null;
 
@@ -24,9 +24,15 @@ const dataURL = "https://static.shinycolors.moe/spines";
 const $ = document.querySelectorAll.bind(document);
 
 async function Init() {
+    canvas = $("canvas")[0];
+
+    if (document.getElementById("typeList").getAttribute("data-Exists") == 0) {
+        alert("網站作者沒有這張卡，所以沒有live2d給你看:((((\n如果有人有意願補完請聯絡我 euphokumiko[at]shinycolors.moe");
+
+        return;
+    }
     // Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
     // loading textures. That is handled separately by PolygonBatcher.
-    canvas = $("canvas")[0];
 
     const config = { alpha: false };
     WebGL = canvas.getContext("webgl", config) || canvas.getContext("experimental-webgl", config);
@@ -48,11 +54,6 @@ async function Init() {
     pathTexture = [path, document.getElementById("typeList").value, "data.png"].join("/");
     pathAtlas = [path, document.getElementById("typeList").value, "data.atlas"].join("/");
     pathJSON = [path, document.getElementById("typeList").value, "data.json"].join("/");
-
-
-    // 애셋 불러오기
-
-    // 배경 색상 선택기
 
     SetupTypeList();
 
