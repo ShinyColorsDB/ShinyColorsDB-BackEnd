@@ -6,22 +6,40 @@ const cvCache = new cache();
 const conn = require('../../db/db.js');
 
 info.get("/IdolInfo", async (req, res, next) => {
-    if (!req.query.IdolID) res.redirect("./idolInfo?IdolID=1");
+    if (!req.query.IdolID) res.redirect("./IdolInfo?IdolID=1");
 
     const [ListByGroup, List] = await DBGetIdolList();
     const IdolInfo = await DBGetIdolInfo(req.query.IdolID);
 
-    const CardInfo = await DBGetCardList(req.query.IdolID);
+    const CardList = await DBGetCardList(req.query.IdolID);
 
     res.render('IdolInfo', {
         IdolList: ListByGroup,
         Img: GenerateImgObj(List[req.query.IdolID - 1].IdolNick),
         IdolInfo: IdolInfo,
-        CardInfo: CardInfo
+        CardList: CardList
     });
 });
 
+info.get("/PCardInfo", async (req, res, next) => {
+    if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
 
+    const [ListByGroup, List] = await DBGetIdolList();    
+    const [Panel, IdolID] = await DBGetPCardPanel(req.query.UUID);
+    const IdolInfo = await DBGetIdolInfo(IdolID);
+    const CardInfo = await DBGetPCardInfo(req.query.UUID);
+    console.log(CardInfo);
+    //console.log(Panel);
+
+
+    res.render('PCardViewer', {
+        IdolList: ListByGroup,
+        SkillPanel: Panel,
+        IdolInfo: IdolInfo,
+        CardInfo: CardInfo
+    });
+
+});
 
 module.exports = info;
 
@@ -97,7 +115,6 @@ function DBGetCardList(IdolID) {
     });
 }
 
-
 function GenerateImgObj(str) {
     return {
         ImgPrivate: `https://static.shinycolors.moe/pictures/tachie/private/${str}.png`,
@@ -105,3 +122,24 @@ function GenerateImgObj(str) {
         ImgLive: `https://static.shinycolors.moe/pictures/tachie/live/${str}.png`
     }
 }
+
+function DBGetPCardPanel(CardUUID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `10-CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardID = b.CardID ORDER BY b.SkillSlot", 
+        [CardUUID], 
+        (err, result) => {
+            res([result, result[0].IdolID]);
+        });
+    });
+}
+
+function DBGetPCardInfo(CardUUID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT a.* FROM `3-IdolCards` AS a WHERE a.CardUUID = ?", 
+        [CardUUID], 
+        (err, result) => {
+            res(result[0]);
+        });
+    });
+}
+//14618ede-7ed7-41c9-adec-1b60d1830582

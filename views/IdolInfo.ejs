@@ -17,14 +17,14 @@
     <meta property="og:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="og:title" content="<%= IdolInfo.IdolName %>">
     <meta property="og:description" content="姓名: <%= IdolInfo.IdolName %> 生日: <%= IdolInfo.Birthday %> 團體: <%= IdolInfo.UnitName %>">
-    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.PSSR.slice(-1)[0].BigPic1 %>">
+    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="twitter:title" content="<%= IdolInfo.IdolName %>">
     <meta property="twitter:description" content="姓名: <%= IdolInfo.IdolName %> 生日: <%= IdolInfo.Birthday %> 團體: <%= IdolInfo.UnitName %>">
-    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.PSSR.slice(-1)[0].BigPic1 %>">
+    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
 
     <title><%= IdolInfo.IdolName %>-ShinyColorsDB</title>
     <script src="/static/javascript/IdolInfo.js"></script>
@@ -175,10 +175,10 @@
                         <div class="w-50 col-md-4 d-inline-block">
                             <h5 class="text-left" id="cardTypeTitle">P-SSR</h5>
                             <ul class="text-left list-group overflow-auto cardList" id="PSSRCardList">
-                                <% for(let k = 0; k < CardInfo.PSSR.length; k++) { %>
+                                <% for(let k = 0; k < CardList.PSSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.PSSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.PSSR[k].CardUUID %>" data-cardname="<%= CardInfo.PSSR[k].CardName %>">
-                                            <%= CardInfo.PSSR[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.PSSR[k].BigPic1 %>" data-carduuid="<%= CardList.PSSR[k].CardUUID %>" data-cardname="<%= CardList.PSSR[k].CardName %>">
+                                            <%= CardList.PSSR[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
@@ -190,63 +190,63 @@
                                 <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ソラを跳ね】櫻木真乃</a></li-->
                             </ul>
                             <ul class="text-left list-group d-none overflow-auto cardList" id="PSRCardList">
-                                <% for(let k = 0; k < CardInfo.PSR.length; k++) { %>
+                                <% for(let k = 0; k < CardList.PSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.PSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.PSR[k].CardUUID %>" data-cardname="<%= CardInfo.PSR[k].CardName %>">
-                                            <%= CardInfo.PSR[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.PSR[k].BigPic1 %>" data-carduuid="<%= CardList.PSR[k].CardUUID %>" data-cardname="<%= CardList.PSR[k].CardName %>">
+                                            <%= CardList.PSR[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
                             </ul>
                             <ul class="text-left list-group d-none overflow-auto cardList" id="PRCardList">
-                                <% for(let k = 0; k < CardInfo.PR.length; k++) { %>
+                                <% for(let k = 0; k < CardList.PR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.PR[k].BigPic1 %>" data-carduuid="<%= CardInfo.PR[k].CardUUID %>" data-cardname="<%= CardInfo.PR[k].CardName %>">
-                                            <%= CardInfo.PR[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.PR[k].BigPic1 %>" data-carduuid="<%= CardList.PR[k].CardUUID %>" data-cardname="<%= CardList.PR[k].CardName %>">
+                                            <%= CardList.PR[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
                             </ul>
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SSSRCardList">
-                                <% for(let k = 0; k < CardInfo.SSSR.length; k++) { %>
+                                <% for(let k = 0; k < CardList.SSSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SSSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.SSSR[k].CardUUID %>" data-cardname="<%= CardInfo.SSSR[k].CardName %>">
-                                            <%= CardInfo.SSSR[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.SSSR[k].BigPic1 %>" data-carduuid="<%= CardList.SSSR[k].CardUUID %>" data-cardname="<%= CardList.SSSR[k].CardName %>">
+                                            <%= CardList.SSSR[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
                             </ul>
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SSRCardList">
-                                <% for(let k = 0; k < CardInfo.SSR.length; k++) { %>
+                                <% for(let k = 0; k < CardList.SSR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SSR[k].BigPic1 %>" data-carduuid="<%= CardInfo.SSR[k].CardUUID %>" data-cardname="<%= CardInfo.SSR[k].CardName %>">
-                                            <%= CardInfo.SSR[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.SSR[k].BigPic1 %>" data-carduuid="<%= CardList.SSR[k].CardUUID %>" data-cardname="<%= CardList.SSR[k].CardName %>">
+                                            <%= CardList.SSR[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
                             </ul>
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SRCardList">
-                                <% for(let k = 0; k < CardInfo.SR.length; k++) { %>
+                                <% for(let k = 0; k < CardList.SR.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SR[k].BigPic1 %>" data-carduuid="<%= CardInfo.SR[k].CardUUID %>" data-cardname="<%= CardInfo.SR[k].CardName %>">
-                                            <%= CardInfo.SR[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.SR[k].BigPic1 %>" data-carduuid="<%= CardList.SR[k].CardUUID %>" data-cardname="<%= CardList.SR[k].CardName %>">
+                                            <%= CardList.SR[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
                             </ul>
                             <ul class="text-left list-group d-none overflow-auto cardList" id="SNCardList">
-                                <% for(let k = 0; k < CardInfo.SN.length; k++) { %>
+                                <% for(let k = 0; k < CardList.SN.length; k++) { %>
                                     <li>
-                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardInfo.SN[k].BigPic1 %>" data-carduuid="<%= CardInfo.SN[k].CardUUID %>" data-cardname="<%= CardInfo.SN[k].CardName %>">
-                                            <%= CardInfo.SN[k].CardName %>
+                                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.SN[k].BigPic1 %>" data-carduuid="<%= CardList.SN[k].CardUUID %>" data-cardname="<%= CardList.SN[k].CardName %>">
+                                            <%= CardList.SN[k].CardName %>
                                         </a>
                                     </li>
                                 <% } %>
                             </ul>
                         </div>
                         <div class="w-50 col-md-8 d-inline-block mh-100">
-                            <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.PSSR[0].BigPic1 %>" alt="" class="img-fluid" id="cardPicture">
-                            <a href="<%= `/info/PCardInfo?UUID=${CardInfo.PSSR[0].CardUUID}` %>" class="text-center" id="cardInfoLink"><%=CardInfo.PSSR[0].CardName%></a>
+                            <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR[0].BigPic1 %>" alt="" class="img-fluid" id="cardPicture">
+                            <a href="<%= `/info/PCardInfo?UUID=${CardList.PSSR[0].CardUUID}` %>" class="text-center" id="cardInfoLink"><%=CardList.PSSR[0].CardName%></a>
                         </div>
                     </div>
                 </div>
