@@ -42,6 +42,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.get("/", function(req, res, next) {
+    console.log(req.get('origin'), req.get('host'));
     if (req.get('origin') == "shinycolors.moe") {
         res.redirect("https://shinycolors.moe/info/IdolInfo?IdolID=1");
     }
