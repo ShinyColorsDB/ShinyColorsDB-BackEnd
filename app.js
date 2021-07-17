@@ -24,7 +24,7 @@ app.use("/general", generalRouter);
 app.use("/info", infoRouter);
 
 app.get("/", (req, res, next) => {
-    console.log(req.get("CF-IPCountry"));
+    console.log(req.get("x-forwarded-for"));
     next();
 });
 
