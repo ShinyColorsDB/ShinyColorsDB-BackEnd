@@ -23,6 +23,11 @@ app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
 app.use("/info", infoRouter);
 
+app.get("/", (req, res, next) => {
+    console.log(req.get("CF-IPCountry"));
+    next();
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
