@@ -23,6 +23,13 @@ app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
 app.use("/info", infoRouter);
 
+app.get("/", (req, res, next) => {
+    console.log(req.get('origin'), req.get('host'));
+    if (req.get('origin') == "shinycolors.moe") {
+        res.redirect("https://shinycolors.moe/info/IdolInfo?IdolID=1");
+    }
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
@@ -39,13 +46,6 @@ app.use(function(err, req, res, next) {
     res.render('error', {
         error: err
     });
-});
-
-app.get("/", (req, res, next) => {
-    console.log(req.get('origin'), req.get('host'));
-    if (req.get('origin') == "shinycolors.moe") {
-        res.redirect("https://shinycolors.moe/info/IdolInfo?IdolID=1");
-    }
 });
 
 module.exports = app;
