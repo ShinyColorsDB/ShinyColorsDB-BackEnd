@@ -41,4 +41,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
+app.get("/", function(req, res, next) {
+    if (req.get('origin') == "shinycolors.moe") {
+        res.redirect("https://shinycolors.moe/info/IdolInfo?IdolID=1");
+    }
+});
+
 module.exports = app;
