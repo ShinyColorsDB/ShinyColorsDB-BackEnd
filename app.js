@@ -23,6 +23,8 @@ app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
 app.use("/info", infoRouter);
 
+app.disable('x-powered-by');
+
 app.get("/.*/", (req, res, next) => {
     console.log(req.get("x-forwarded-for"));
     next();
