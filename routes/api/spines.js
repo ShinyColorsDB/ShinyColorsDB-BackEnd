@@ -23,7 +23,7 @@ spines.get("/dressList/:IdolID", (req, res, next) => {
 spines.get("/updateLog", (req, res, next) => {
     conn.query("SELECT `Date`, `Content` FROM `21-SpineLog` ORDER BY `LogIndex` DESC LIMIT 3", (err, result) => {
         result.forEach(element => {
-            element.Content = JSON.parse(`[" ${element.Content.replace(/\n/g, "\",\"") } "]`);
+            element.Content = JSON.parse(`["${element.Content.replace(/\n/g, "\",\"") }"]`);
         });
         console.log(result);
         res.send(result);
