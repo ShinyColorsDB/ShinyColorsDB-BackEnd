@@ -20,4 +20,10 @@ spines.get("/dressList/:IdolID", (req, res, next) => {
     });
 });
 
+spines.get("/updateLog", (req, res, next) => {
+    conn.query("SELECT `Date`, `Content` FROM `21-SpineLog` ORDER BY `LogIndex` DESC LIMIT 5", (err, result) => {
+        res.send(result);
+    });
+});
+
 module.exports = spines;
