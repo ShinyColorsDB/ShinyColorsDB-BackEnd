@@ -15,7 +15,7 @@ spines.get("/idolList", (req, res, next) => {
 });
 
 spines.get("/dressList/:IdolID", (req, res, next) => {
-    conn.query("SELECT * FROM `20-IdolDresses` WHERE `IdolID` = ? ORDER BY FIELD (`DressType`, \"P_SSR\", \"P_SR\", \"Anniversary\", \"Special\"), `DressIndex`", [req.params.IdolID], (err, result) => {
+    conn.query("SELECT * FROM `20-IdolDresses` WHERE `IdolID` = ? ORDER BY FIELD (`DressType`, \"P_SSR\", \"P_SR\", \"Anniversary\", \"Mizugi\",\"Special\"), `DressOrder`", [req.params.IdolID], (err, result) => {
         res.send(result);
     });
 });
