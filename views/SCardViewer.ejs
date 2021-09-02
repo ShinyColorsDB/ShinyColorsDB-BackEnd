@@ -27,7 +27,11 @@
         <meta property="twitter:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
         <meta property="twitter:title" content="<%= CardInfo.CardName %>">
         <meta property="twitter:description"
-            content="名稱: <%= CardInfo.CardName %> 實裝日期: <%= CardInfo.ReleaseDate %> 稀有度: <%= CardInfo.CardType %>">
+            content="
+            名稱: <%= CardInfo.CardName %> 
+            實裝日期: <%= CardInfo.ReleaseDate %> 
+            稀有度: <%= CardInfo.CardType %>"
+        >
         <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
 
         <script src="/static/javascript/SCardViewer.js"></script>
