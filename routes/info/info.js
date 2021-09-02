@@ -23,6 +23,8 @@ info.get("/IdolInfo", async (req, res, next) => {
 });
 
 info.get("/PCardInfo", async (req, res, next) => {
+    res.redirect("./IdolInfo?IdolID=1");
+    return;
     if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
 
     const [ListByGroup, List] = await DBGetIdolList();    
