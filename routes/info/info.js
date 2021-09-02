@@ -51,18 +51,61 @@ info.get("/SCardInfo", async (req, res) => {
         res.sendStatus(404);
         return;
     }
+    Panel.forEach(e => {
+        e.PanelDesc = e.PanelDesc.replace(/\n/g, "<br>");
+    });
     const IdolInfo = await DBGetIdolInfo(IdolID);
     const CardInfo = await DBGetSCardInfo(req.query.UUID);
     const SupportSkills = await DBGetSupportSkills(req.query.UUID);
     const SupportEvents = await DBGetSupportEvents(req.query.UUID);
-
+    const IdeaMark = await DBGetIdeaMark(req.query.UUID);
+    switch(IdeaMark.IdeaMark) {
+        case "skill_point":
+            IdeaMark.IdeaMark = "アピール";
+            break;
+        case "mental":
+            IdeaMark.IdeaMark = "トーク";
+            break;
+        case "visual":
+            IdeaMark.IdeaMark = "ビジュアル";
+            break;
+        case "dance":
+            IdeaMark.IdeaMark = "ダンス";
+            break;
+        case "vocal":
+            IdeaMark.IdeaMark = "ボーカル";
+            break;
+    }
+    const Proficiency = await DBGetProficiency(req.query.UUID);
+    Proficiency.forEach(element => {
+        switch(element.Proficiency) {
+            case "sing_ability": 
+                element.Proficiency = "歌唱力";
+                break;
+            case "feel_stable":
+                element.Proficiency = "安定感";
+                break;
+            case "teamwork":
+                element.Proficiency = "團結力";
+                break;
+            case "concentration":
+                element.Proficiency = "集中力";
+                break;
+            case "expressive_power":
+                element.Proficiency = "表現力";
+                break;
+        }
+    });
+    
     res.render('SCardViewer', {
         IdolList: ListByGroup,
         SkillPanel: Panel,
         IdolInfo: IdolInfo,
         CardInfo: CardInfo,
         SupportSkills: SupportSkills,
-        SupportEvents: SupportEvents
+        SupportEvents: SupportEvents,
+        IdeaMark: IdeaMark,
+        Proficiency: Proficiency
     });
 });
 
@@ -188,7 +231,7 @@ function DBGetSCardInfo(CardUUID) {
         conn.execute("SELECT a.* FROM `3-IdolCards` AS a WHERE a.CardUUID = ? ;", 
         [CardUUID], 
         (err, result) => {
-            //result[0].ReleaseDate = date.
+            result[0].ReleaseDate = date.format(new Date(result[0].ReleaseDate), 'MM/dd/yyyy');
             res(result[0]);
         });
     });
@@ -226,6 +269,26 @@ function DBGetSupportEvents(CardUUID) {
         [CardUUID], 
         (err, result) => {
             res(result);
+        });
+    }); 
+}
+
+function DBGetProficiency(CardUUID) {
+    return new Promise((res, _) => {
+        conn.execute("SELECT a.* FROM `18-CardProficiencies` a, `3-IdolCards` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
+        [CardUUID], 
+        (err, result) => {
+            res(result);
+        });
+    }); 
+}
+
+function DBGetIdeaMark(CardUUID) {
+    return new Promise((res, _) => {
+        conn.execute("SELECT a.* FROM `17-CardIdeaMark` a, `3-IdolCards` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
+        [CardUUID], 
+        (err, result) => {
+            res(result[0]);
         });
     }); 
 }

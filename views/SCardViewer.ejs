@@ -30,6 +30,8 @@
             content="名稱: <%= CardInfo.CardName %> 實裝日期: <%= CardInfo.ReleaseDate %> 稀有度: <%= CardInfo.CardType %>">
         <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
 
+        <script src="/static/javascript/SCardViewer.js"></script>
+
         <title>
             <%= CardInfo.CardName %>-ShinyColorsDB
         </title>
@@ -60,12 +62,13 @@
                             id=<%=`unit${i + 1}` %>>
                             <% for(let k=0; k < IdolList[i].Idols.length; k++) { %>
                                 <a href=<%=`/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %>
-                                    class=" <% if(IdolList[i].Idols[k].IdolID==IdolInfo.IdolID) { %>
+                                    class=" 
+                                    <% if(IdolList[i].Idols[k].IdolID==IdolInfo.IdolID) { %>
                                         list-group-item active ps-4 list-group-item-action
-                                        <% } else { %>
-                                            list-group-item ps-4 list-group-item-action
-                                            <% } %>">
-                                                <%= IdolList[i].Idols[k].IdolName %>
+                                    <% } else { %>
+                                        list-group-item ps-4 list-group-item-action
+                                    <% } %>">
+                                    <%= IdolList[i].Idols[k].IdolName %>
                                 </a>
                                 <% } %>
                         </div>
@@ -118,21 +121,24 @@
                         <ul id="hexGrid">
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                         <div class="hexagon"></div>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                         <div class='hexagon'></div>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink d-flex align-items-center justify-content-center bg-secondary" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center bg-secondary" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[0].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                             <%= SkillPanel[0].PanelTitle %>
                                         </div>
@@ -141,25 +147,28 @@
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[2].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[2].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[2].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                             <%= SkillPanel[2].PanelTitle %>
                                         </div>
@@ -168,7 +177,10 @@
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[1].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[1].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[1].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                             <%= SkillPanel[1].PanelTitle %>
                                         </div>
@@ -177,19 +189,24 @@
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant <% } else if(SkillPanel[5].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant no <% } else if(SkillPanel[5].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        <% if(SkillPanel.length > 3) { %>
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[5].PanelDesc %>'
+                                        <% } %>>
                                         <div class="w-100 text-center">
                                             <% if(SkillPanel.length > 3 && SkillPanel[5]) { %> <%= SkillPanel[5].PanelTitle %> <% } %>
                                         </div>
@@ -198,7 +215,12 @@
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant <% } else if(SkillPanel[4].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant no <% } else if(SkillPanel[4].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        <% if(SkillPanel.length > 3) { %>
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[4].PanelDesc %>'
+                                        <% } %>>
                                         <div class="w-100 text-center">
                                             <% if(SkillPanel.length > 3 && SkillPanel[4]) { %> <%= SkillPanel[4].PanelTitle %> <% } %>
                                         </div>
@@ -207,7 +229,12 @@
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant <% } else if(SkillPanel[3].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant no <% } else if(SkillPanel[3].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        <% if(SkillPanel.length > 3) { %>
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[3].PanelDesc %>'
+                                        <% } %>>
                                         <div class="w-100 text-center">
                                             <% if(SkillPanel.length > 3 && SkillPanel[3]) { %> <%= SkillPanel[3].PanelTitle %> <% } %>
                                         </div>
@@ -216,14 +243,17 @@
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
+                                    <a class="hexLink no" href="#">
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <% if(SkillPanel.length == 10) { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[9].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[9].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[9].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                             <%= SkillPanel[9].PanelTitle %>
                                         </div>
@@ -239,19 +269,25 @@
                             <li class="hex">
                                 <div class="hexIn">
                                     <% if(SkillPanel.length == 10) { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[8].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[8].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[8].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                         <%= SkillPanel[8].PanelTitle %>
                                         </div>
                                     </a>
                                     <% } else if(SkillPanel.length == 8){ %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[7].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                         <%= SkillPanel[7].PanelTitle %>
                                         </div>
                                     </a>
                                     <% } else { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">                                    
+                                    <a class="hexLink d-flex align-items-center justify-content-center no" href="#">                                    
                                         <div class="w-100 text-center">
                                         </div>
                                     </a>
@@ -261,19 +297,25 @@
                             <li class="hex">
                                 <div class="hexIn">
                                     <% if(SkillPanel.length == 10) { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[7].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                         <%= SkillPanel[7].PanelTitle %>
                                         </div>
                                     </a>
                                     <% } else if(SkillPanel.length == 8){ %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[6].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                         <%= SkillPanel[6].PanelTitle %>
                                         </div>
                                     </a>
                                     <% } else { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">                                    
+                                    <a class="hexLink d-flex align-items-center justify-content-center no" href="#">                                    
                                         <div class="w-100 text-center">
                                         </div>
                                     </a>
@@ -283,22 +325,25 @@
                             <li class="hex">
                                 <div class="hexIn">
                                     <% if(SkillPanel.length == 10) { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#"
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[7].PanelDesc %>'>
                                         <div class="w-100 text-center">
                                             <%= SkillPanel[7].PanelTitle %>
                                         </div>
                                     </a>
                                     <% } else { %>
-                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">
+                                    <a class="hexLink d-flex align-items-center justify-content-center no" href="#">
                                         <div class="w-100 text-center">
                                         </div>
                                     </a>
                                     <% } %>
                                 </div>
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
-                    <div class="col-6">
+                    <div class="col-7">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -333,6 +378,26 @@
                                         </td>
                                     </tr>
                                     <% }) %>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>アイデア</th>
+                                    <th>ひらめき</th>
+                                    <th>樂曲熟練度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= IdeaMark.IdeaMark %></td>
+                                    <td><%= IdolInfo.Hirameki %></td>
+                                    <td>
+                                        <% Proficiency.forEach(element => { %>
+                                            <%= element.Proficiency %>  
+                                        <% }) %>
+                                        </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

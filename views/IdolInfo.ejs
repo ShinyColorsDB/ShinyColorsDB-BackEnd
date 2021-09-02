@@ -169,10 +169,10 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body d-flex pl-0 pr-0">
+                    <div class="card-body d-flex pl-0 pr-0 pb-0">
                         <!--h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p-->
-                        <div class="w-50 col-md-4 d-inline-block">
+                        <div class="w-50 col-md-4 d-inline-block container h-100">
                             <h5 class="text-left" id="cardTypeTitle">P-SSR</h5>
                             <ul class="text-left list-group overflow-auto cardList" id="PSSRCardList">
                                 <% for(let k = 0; k < CardList.PSSR.length; k++) { %>
@@ -207,7 +207,7 @@
                                     </li>
                                 <% } %>
                             </ul>
-                            <ul class="text-left list-group d-none overflow-auto cardList" id="SSSRCardList">
+                            <ul class="text-left list-group d-none overflow-scroll cardList h-auto" id="SSSRCardList">
                                 <% for(let k = 0; k < CardList.SSSR.length; k++) { %>
                                     <li>
                                         <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement" data-picture="<%= CardList.SSSR[k].BigPic1 %>" data-carduuid="<%= CardList.SSSR[k].CardUUID %>" data-cardname="<%= CardList.SSSR[k].CardName %>">
