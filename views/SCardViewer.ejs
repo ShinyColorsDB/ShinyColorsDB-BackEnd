@@ -1,0 +1,413 @@
+<!DOCTYPE htms>
+
+<htms class="h-100 w-100" lang="zh-Hant-tw">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="/static/css/SCardViewer.css">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
+        <meta property="og:title" content="<%= CardInfo.CardName %>">
+        <meta property="og:description"
+            content="名稱: <%= CardInfo.CardName %> 實裝日期: <%= CardInfo.ReleaseDate %> 稀有度: <%= CardInfo.CardType %>">
+        <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
+        <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
+        <meta property="twitter:title" content="<%= CardInfo.CardName %>">
+        <meta property="twitter:description"
+            content="名稱: <%= CardInfo.CardName %> 實裝日期: <%= CardInfo.ReleaseDate %> 稀有度: <%= CardInfo.CardType %>">
+        <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
+
+        <title>
+            <%= CardInfo.CardName %>-ShinyColorsDB
+        </title>
+
+    </head>
+
+    <body class="h-100" onload="Init();">
+        <div class="container-fluid d-flex p-0 h-100">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-2 list-group"
+                id="divSidebar">
+                <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg"
+                    data-bs-toggle="collapse" data-bs-target="#divMainList">首頁</a>
+                <div class="list-group well overflow-auto custom-scroll collapse" id="divMainList">
+                    <a href="/" class="list-group-item">ShinyColorsDB</a>
+                    <a href="#" class="list-group-item">最新情報</a>
+                    <a href="#" class="list-group-item">無限期招募前端大師= =</a>
+                </div>
+
+                <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded" data-bs-toggle="collapse"
+                    data-bs-target="#divIdolUnitList">角色列表</a>
+                <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
+                    <% for(let i=0; i < IdolList.length; i++) { %>
+                        <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}`
+                            %>>
+                            <%= IdolList[i].UnitName %>
+                        </a>
+                        <div class="<% if(i + 1 == IdolInfo.UnitID) { %> list-group <% } else { %> list-group collapse <% } %>"
+                            id=<%=`unit${i + 1}` %>>
+                            <% for(let k=0; k < IdolList[i].Idols.length; k++) { %>
+                                <a href=<%=`/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %>
+                                    class=" <% if(IdolList[i].Idols[k].IdolID==IdolInfo.IdolID) { %>
+                                        list-group-item active ps-4 list-group-item-action
+                                        <% } else { %>
+                                            list-group-item ps-4 list-group-item-action
+                                            <% } %>">
+                                                <%= IdolList[i].Idols[k].IdolName %>
+                                </a>
+                                <% } %>
+                        </div>
+                        <% } %>
+
+                </div>
+                <a href="https://spine.shinycolors.moe"
+                    class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg">服裝Live2d~~</a>
+            </div>
+            <div class="col-md-10 pt-3 ps-2 overflow-auto">
+                <h2>
+                    <%= CardInfo.CardName %>
+                </h2>
+                <div class="col-12 row">
+                    <div class="col-5 p-0 d-inline">
+                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>" alt=""
+                            class="img-fluid ps-3">
+                    </div>
+                    <div class="col-7 p-0 d-inline">
+                        <div class="ps-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">技能名稱</th>
+                                        <th scope="col">技能描述</th>
+                                        <th scope="col">最大等級</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% SupportSkills.forEach(element=> { %>
+                                        <tr>
+                                            <td scope="row">
+                                                <%= element.SkillName %>
+                                            </td>
+                                            <td scope="row">
+                                                <%= element.SkillDesc %>
+                                            </td>
+                                            <td scope="row">
+                                                <%= element.SkillLevel %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 row pt-4 h-100">
+                    <div class="grid col-5">
+                        <ul id="hexGrid">
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image:url(https://images.unsplash.com/photo-1417436026361-a033044d901f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=faa4e192f33e0d6b7ce0e54f15140e42);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/44/MIbCzcvxQdahamZSNQ26_12082014-IMG_3526.jpg?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=49dab7a5e4b2e28b5707bc2db974c94b);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'>
+                                            <%= SkillPanel[0].PanelTitle %>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1423145369430-a9ea0de096cd?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1432887382605-0abf9cc49e8f?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/uploads/14122811862445bc266cf/931448f2?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1417026846249-f31f7e43fc35?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/uploads/14122811862445bc266cf/931448f2?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1423145369430-a9ea0de096cd?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image:url(https://images.unsplash.com/photo-1417436026361-a033044d901f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=faa4e192f33e0d6b7ce0e54f15140e42);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1425668273332-3a46ab26b161?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=d453ab3dec298c43415526458b360fa6);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/44/MIbCzcvxQdahamZSNQ26_12082014-IMG_3526.jpg?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=49dab7a5e4b2e28b5707bc2db974c94b);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1432887382605-0abf9cc49e8f?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink" href="#">
+                                        <div class='img'
+                                            style='background-image: url(https://images.unsplash.com/photo-1417026846249-f31f7e43fc35?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                        </div>
+                                        <h1 id="demo1">This is a title</h1>
+                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <!--div id="skillPanel" class="col-6 container d-flex">
+                    <div class="row w-100 align-items-center">
+                        <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-4">
+                            <div class="d-flex flex-column justify-content-center bg-secondary">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[0].PanelTitle %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-n3">
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[2].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[2].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[1].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[1].PanelTitle %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-n3">
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[5].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[5].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[4].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[4].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[3].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[3].PanelTitle %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 w-100 d-flex justify-content-center mb-2 mt-n3">
+                            <% if (SkillPanel.length==10) { %>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[9].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[9].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[8].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[8].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[7].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[7].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[6].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[6].PanelTitle %>
+                                </div>
+                            </div>
+                            <% } else if (SkillPanel.length==8){ %>
+                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[7].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[7].PanelTitle %>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[6].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
+                                <div class="skillTitle align-self-center text-center">
+                                    <%= SkillPanel[6].PanelTitle %>
+                                </div>
+                            </div>
+                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
+                            <% } else { %>
+                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
+                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
+                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
+                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div-->
+                    <div class="col-6">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">事件名稱</th>
+                                    <th scope="col">Vo</th>
+                                    <th scope="col">Da</th>
+                                    <th scope="col">Vi</th>
+                                    <th scope="col">Me</th>
+                                    <th scope="col">Sp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% SupportEvents.forEach(element=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= element.EventName %>
+                                        </td>
+                                        <td>
+                                            <%= element.EventAddVo %>
+                                        </td>
+                                        <td>
+                                            <%= element.EventAddDa %>
+                                        </td>
+                                        <td>
+                                            <%= element.EventAddVi %>
+                                        </td>
+                                        <td>
+                                            <%= element.EventAddMe %>
+                                        </td>
+                                        <td>
+                                            <%= element.EventAddSp %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>

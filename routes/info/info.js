@@ -41,6 +41,26 @@ info.get("/PCardInfo", async (req, res, next) => {
 
 });
 
+info.get("/SCardInfo", async (req, res) => {
+    if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
+
+    const [ListByGroup, List] = await DBGetIdolList();    
+    const [Panel, IdolID] = await DBGetSCardPanel(req.query.UUID);
+    const IdolInfo = await DBGetIdolInfo(IdolID);
+    const CardInfo = await DBGetSCardInfo(req.query.UUID);
+    const SupportSkills = await DBGetSupportSkills(req.query.UUID);
+    const SupportEvents = await DBGetSupportEvents(req.query.UUID);
+
+    res.render('SCardViewer', {
+        IdolList: ListByGroup,
+        SkillPanel: Panel,
+        IdolInfo: IdolInfo,
+        CardInfo: CardInfo,
+        SupportSkills: SupportSkills,
+        SupportEvents: SupportEvents
+    });
+});
+
 module.exports = info;
 
 function DBGetIdolList() {
@@ -125,7 +145,17 @@ function GenerateImgObj(str) {
 
 function DBGetPCardPanel(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `10-CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardID = b.CardID ORDER BY b.SkillSlot", 
+        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `10-CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.SkillSlot", 
+        [CardUUID], 
+        (err, result) => {
+            res([result, result[0].IdolID]);
+        });
+    });
+}
+
+function DBGetSCardPanel(CardUUID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `14-CardSkillPanels` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.PanelSlot", 
         [CardUUID], 
         (err, result) => {
             res([result, result[0].IdolID]);
@@ -141,5 +171,51 @@ function DBGetPCardInfo(CardUUID) {
             res(result[0]);
         });
     });
+}
+
+function DBGetSCardInfo(CardUUID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT a.* FROM `3-IdolCards` AS a WHERE a.CardUUID = ? ;", 
+        [CardUUID], 
+        (err, result) => {
+            res(result[0]);
+        });
+    });
+}
+
+function DBGetProperty(CardUUID) {
+    return new Promise((res, rej) => {
+        conn.execute("SELECT a.")
+    });
+}
+
+function DBGetSupportSkills(CardUUID) {
+    return new Promise((res, _) => {
+        conn.execute("SELECT a.* FROM `16-CardSupportSkills` AS a, `3-IdolCards` AS b WHERE b.CardUUID = ? AND a.CardIndex = b.CardIndex", 
+        [CardUUID],
+        (err, result) => {
+            let tmp = new Map();
+            result.forEach(element => {
+                if (tmp.has(element.SkillName) && tmp.get(element.SkillName).SkillLevel < element.SkillLevel) {
+                    tmp.set(element.SkillName, element);
+                }
+                else if (!tmp.has(element.SkillName)) {
+                    tmp.set(element.SkillName, element);
+                }
+            });
+            const ls = Array.from(tmp, ([key, value]) => value);
+            res(ls);
+        })
+    });
+}
+
+function DBGetSupportEvents(CardUUID) {
+    return new Promise((res, _) => {
+        conn.execute("SELECT a.* FROM `19-CardSupportEvents` a, `3-IdolCards` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ? ORDER BY `EventID`",
+        [CardUUID], 
+        (err, result) => {
+            res(result);
+        });
+    }); 
 }
 //14618ede-7ed7-41c9-adec-1b60d1830582

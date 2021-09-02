@@ -3,7 +3,12 @@ $(function() {
     $(".cardElement").click(function(e) {
         let pic = $(this).attr("data-picture"), link = $(this).attr("data-carduuid"), name = $(this).attr("data-cardname");
         $("#cardPicture").attr("src", `https://static.shinycolors.moe/pictures/bigPic/${pic}`);
-        $('#cardInfoLink').attr("href", `/info/PCardInfo?UUID=${link}`).text(name);
+        if ($("#PList").hasClass("active")) {
+            $('#cardInfoLink').attr("href", `/info/PCardInfo?UUID=${link}`).text(name);
+        }
+        else {
+            $('#cardInfoLink').attr("href", `/info/SCardInfo?UUID=${link}`).text(name);
+        }
     });
 
     $(".cardType").click(function(e) {
