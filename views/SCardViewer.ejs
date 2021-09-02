@@ -1,6 +1,6 @@
 <!DOCTYPE htms>
 
-<htms class="h-100 w-100" lang="zh-Hant-tw">
+<html class="h-100 w-100" lang="zh-Hant-tw">
 
     <head>
         <meta charset="UTF-8">
@@ -113,262 +113,191 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 row pt-4 h-100">
+                <div class="col-12 row pt-4">
                     <div class="grid col-5">
                         <ul id="hexGrid">
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image:url(https://images.unsplash.com/photo-1417436026361-a033044d901f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=faa4e192f33e0d6b7ce0e54f15140e42);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
-                                    </a>
-                                </div>
-                            </li>
-
-                            <li class="hex">
-                                <div class="hexIn">
-                                    <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/44/MIbCzcvxQdahamZSNQ26_12082014-IMG_3526.jpg?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=49dab7a5e4b2e28b5707bc2db974c94b);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                        <div class="hexagon"></div>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'>
+                                        <div class='hexagon'></div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink d-flex align-items-center justify-content-center bg-secondary" href="#">
+                                        <div class="w-100 text-center">
                                             <%= SkillPanel[0].PanelTitle %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1423145369430-a9ea0de096cd?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1432887382605-0abf9cc49e8f?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/uploads/14122811862445bc266cf/931448f2?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[2].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[2].PanelTitle %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[1].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[1].PanelTitle %>
+                                        </div>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1417026846249-f31f7e43fc35?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/uploads/14122811862445bc266cf/931448f2?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant <% } else if(SkillPanel[5].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <% if(SkillPanel.length > 3 && SkillPanel[5]) { %> <%= SkillPanel[5].PanelTitle %> <% } %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant <% } else if(SkillPanel[4].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <% if(SkillPanel.length > 3 && SkillPanel[4]) { %> <%= SkillPanel[4].PanelTitle %> <% } %>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="hex">
+                                <div class="hexIn">
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant <% } else if(SkillPanel[3].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <% if(SkillPanel.length > 3 && SkillPanel[3]) { %> <%= SkillPanel[3].PanelTitle %> <% } %>
+                                        </div>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
                                     <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1423145369430-a9ea0de096cd?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
-                                    </a>
-                                </div>
-                            </li>
-
-                            <li class="hex">
-                                <div class="hexIn">
-                                    <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image:url(https://images.unsplash.com/photo-1417436026361-a033044d901f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=faa4e192f33e0d6b7ce0e54f15140e42);'>
-                                        </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1425668273332-3a46ab26b161?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=d453ab3dec298c43415526458b360fa6);'>
+                                    <% if(SkillPanel.length == 10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[9].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[9].PanelTitle %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
+                                    <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                    <% } %>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/44/MIbCzcvxQdahamZSNQ26_12082014-IMG_3526.jpg?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=49dab7a5e4b2e28b5707bc2db974c94b);'>
+                                    <% if(SkillPanel.length == 10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[8].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                        <%= SkillPanel[8].PanelTitle %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
+                                    <% } else if(SkillPanel.length == 8){ %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                        <%= SkillPanel[7].PanelTitle %>
+                                        </div>
+                                    </a>
+                                    <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">                                    
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                    <% } %>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1432887382605-0abf9cc49e8f?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                    <% if(SkillPanel.length == 10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                        <%= SkillPanel[7].PanelTitle %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
+                                    <% } else if(SkillPanel.length == 8){ %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                        <%= SkillPanel[6].PanelTitle %>
+                                        </div>
+                                    </a>
+                                    <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">                                    
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                    <% } %>
                                 </div>
                             </li>
                             <li class="hex">
                                 <div class="hexIn">
-                                    <a class="hexLink" href="#">
-                                        <div class='img'
-                                            style='background-image: url(https://images.unsplash.com/photo-1417026846249-f31f7e43fc35?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=1375&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1725);'>
+                                    <% if(SkillPanel.length == 10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>" href="#">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[7].PanelTitle %>
                                         </div>
-                                        <h1 id="demo1">This is a title</h1>
-                                        <p id="demo2">Some sample text about the article this hexagon leads to</p>
                                     </a>
+                                    <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                    <% } %>
                                 </div>
-                            </li>
+                            </li>                            
                         </ul>
                     </div>
-
-
-                    <!--div id="skillPanel" class="col-6 container d-flex">
-                    <div class="row w-100 align-items-center">
-                        <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-4">
-                            <div class="d-flex flex-column justify-content-center bg-secondary">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[0].PanelTitle %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-n3">
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[2].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[2].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[1].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[1].PanelTitle %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-n3">
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[5].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[5].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[4].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[4].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if(SkillPanel[3].PanelIsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[3].PanelTitle %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 w-100 d-flex justify-content-center mb-2 mt-n3">
-                            <% if (SkillPanel.length==10) { %>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[9].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[9].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[8].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[8].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[7].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[7].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[6].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[6].PanelTitle %>
-                                </div>
-                            </div>
-                            <% } else if (SkillPanel.length==8){ %>
-                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[7].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[7].PanelTitle %>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex flex-column justify-content-center ms-1 me-1 <% if (SkillPanel[6].PanelIsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                                <div class="skillTitle align-self-center text-center">
-                                    <%= SkillPanel[6].PanelTitle %>
-                                </div>
-                            </div>
-                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
-                            <% } else { %>
-                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
-                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
-                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
-                            <div class="d-flex ms-1 me-1 bg-secondary"></div>
-                            <% } %>
-                        </div>
-                    </div>
-                </div-->
                     <div class="col-6">
                         <table class="table">
                             <thead>
@@ -411,3 +340,4 @@
             </div>
         </div>
     </body>
+</html>

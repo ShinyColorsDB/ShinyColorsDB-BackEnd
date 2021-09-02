@@ -1,6 +1,7 @@
 const express = require('express');
 const cache = require("node-cache");
 const info = express.Router();
+const date = require("date-fns");
 const cvCache = new cache();
 
 const conn = require('../../db/db.js');
@@ -46,6 +47,10 @@ info.get("/SCardInfo", async (req, res) => {
 
     const [ListByGroup, List] = await DBGetIdolList();    
     const [Panel, IdolID] = await DBGetSCardPanel(req.query.UUID);
+    if (!IdolID) { 
+        res.sendStatus(404);
+        return;
+    }
     const IdolInfo = await DBGetIdolInfo(IdolID);
     const CardInfo = await DBGetSCardInfo(req.query.UUID);
     const SupportSkills = await DBGetSupportSkills(req.query.UUID);
@@ -158,7 +163,12 @@ function DBGetSCardPanel(CardUUID) {
         conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `14-CardSkillPanels` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.PanelSlot", 
         [CardUUID], 
         (err, result) => {
-            res([result, result[0].IdolID]);
+            if (!result[0]?.IdolID) {
+                res([result, 0]);
+            }
+            else {
+                res([result, result[0].IdolID]);
+            }
         });
     });
 }
@@ -178,6 +188,7 @@ function DBGetSCardInfo(CardUUID) {
         conn.execute("SELECT a.* FROM `3-IdolCards` AS a WHERE a.CardUUID = ? ;", 
         [CardUUID], 
         (err, result) => {
+            //result[0].ReleaseDate = date.
             res(result[0]);
         });
     });
