@@ -58,6 +58,19 @@ info.get("/SCardInfo", async (req, res) => {
     });
     const IdolInfo = await DBGetIdolInfo(IdolID);
     const CardInfo = await DBGetSCardInfo(req.query.UUID);
+    switch(CardInfo.GetMethod) {
+        case "Events": 
+            CardInfo.GetMethod = "活動報酬";
+            break;
+        case "LimitedGasha":
+            CardInfo.GetMethod = "限定卡池";
+            break;
+        case "GeneralGasha": 
+            CardInfo.GetMethod = "常駐卡池";
+            break;
+        default:
+            break;
+    }
     const SupportSkills = await DBGetSupportSkills(req.query.UUID);
     const SupportEvents = await DBGetSupportEvents(req.query.UUID);
     const IdeaMark = await DBGetIdeaMark(req.query.UUID);

@@ -62,8 +62,7 @@
                     data-bs-target="#divIdolUnitList">角色列表</a>
                 <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
                     <% for(let i=0; i < IdolList.length; i++) { %>
-                        <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}`
-                            %>>
+                        <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>>
                             <%= IdolList[i].UnitName %>
                         </a>
                         <div class="<% if(i + 1 == IdolInfo.UnitID) { %> list-group <% } else { %> list-group collapse <% } %>"
@@ -96,6 +95,11 @@
                             class="img-fluid ps-3">
                     </div>
                     <div class="col-7 p-0 d-inline">
+                        <div class="ps-3">
+                            稀有度: <%= CardInfo.CardType %> <br>
+                            實裝日期: <%= CardInfo.ReleaseDate %> <br>
+                            取得方式: <%= CardInfo.GetMethod %>
+                        </div>
                         <div class="ps-3">
                             <table class="table">
                                 <thead>
