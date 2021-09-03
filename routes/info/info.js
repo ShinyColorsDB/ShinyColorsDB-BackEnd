@@ -158,7 +158,7 @@ function DBGetIdolInfo(IdolID) {
 
 function DBGetCardList(IdolID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT * FROM `3-IdolCards` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardID`", [IdolID], (err, result) => {
+        conn.execute("SELECT * FROM `3-IdolCards` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardIndex`", [IdolID], (err, result) => {
             if (err) throw err;
             const CardList = {
                 PSSR: [],

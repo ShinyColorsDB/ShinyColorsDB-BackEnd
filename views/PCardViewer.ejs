@@ -47,7 +47,8 @@
             <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
                 <% for(let i = 0; i < IdolList.length; i++) { %>
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target=<%= `#unit${i + 1}` %>>
-                        <i class="glyphicon glyphicon-chevron-right"></i><%= IdolList[i].UnitName %>
+                        <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png" width="20" height="20" alt="">
+                        <%= IdolList[i].UnitName %>
                     </a>
                     <div class="
                     <% if(i + 1 == IdolInfo.UnitID) { %> 

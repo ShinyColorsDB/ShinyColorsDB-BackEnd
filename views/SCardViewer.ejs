@@ -22,8 +22,7 @@
             content="
             名稱: <%= CardInfo.CardName %> 
             實裝日期: <%= CardInfo.ReleaseDate %> 
-            稀有度: <%= CardInfo.CardType %>
-        ">
+            稀有度: <%= CardInfo.CardType %>">
         <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
         <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
         <!-- Twitter -->
@@ -34,8 +33,7 @@
             content="
             名稱: <%= CardInfo.CardName %> 
             實裝日期: <%= CardInfo.ReleaseDate %> 
-            稀有度: <%= CardInfo.CardType %>"
-        >
+            稀有度: <%= CardInfo.CardType %>">
         <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
 
         <script src="/static/javascript/SCardViewer.js"></script>
@@ -63,7 +61,7 @@
                 <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
                     <% for(let i = 0; i < IdolList.length; i++) { %>
                         <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %> style="background-color: <%= IdolList[i].UnitColor %>">
-                            <img src="https://static.shinycolors.moe/pictures/unitIcon/<%= i + 1 %>.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png" width="20" height="20" alt="">
                             <%= IdolList[i].UnitName %>
                         </a>
                         <div class="<% if(i + 1 == IdolInfo.UnitID) { %> list-group <% } else { %> list-group collapse <% } %>"
@@ -76,6 +74,8 @@
                                     <% } else { %>
                                         list-group-item ps-4 list-group-item-action
                                     <% } %>">
+                                    <img src="https://static.shinycolors.moe/pictures/smlIcon/<% if(IdolList[i].Idols[k].IdolID < 10) { %>0<%=IdolList[i].Idols[k].IdolID%><% } else { %><%=IdolList[i].Idols[k].IdolID%><% } %>.png"
+                                    width="40" height="40" alt="">
                                     <%= IdolList[i].Idols[k].IdolName %>
                                 </a>
                                 <% } %>
@@ -86,7 +86,7 @@
                 <a href="https://spine.shinycolors.moe"
                     class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg">服裝Live2d~~</a>
             </div>
-            <div class="col-md-10 pt-3 ps-2 overflow-auto">
+            <div class="col-10 pt-3 ps-2 overflow-auto">
                 <h2>
                     <%= CardInfo.CardName %>
                 </h2>

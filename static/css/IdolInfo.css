@@ -1,4 +1,19 @@
-.cardList {
-    font-family: Meiryo; 
-    list-style-type: none;
+* {
+    font-family: Meiryo, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background-color: #b3b3b3;
+    border-radius: 100px;
 }

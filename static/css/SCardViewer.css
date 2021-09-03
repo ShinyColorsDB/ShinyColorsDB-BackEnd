@@ -4,12 +4,6 @@
     padding: 0;
 }
 
-.mumi:hover {
-    background: red;
-    transform: rotateY(-180deg);
-    transition: .7s;
-}
-
 .no:hover {
     cursor: default;
 }
