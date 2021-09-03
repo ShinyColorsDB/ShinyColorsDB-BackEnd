@@ -41,7 +41,7 @@
     <script src="/static/javascript/IdolInfo.js"></script>
 </head>
 
-<body class="h-100">
+<body class="h-100" onload="Init();">
     <!--黒木ほのか好婆喔ほのけ-->
     <div class="container-fluid d-flex p-0 h-100">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-2 list-group"
@@ -59,7 +59,8 @@
             <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
                 <% for(let i=0; i < IdolList.length; i++) { %>
                     <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>
-                        style="background-color: <%= IdolList[i].UnitColor %>">
+                        style="background-color: <%= IdolList[i].UnitColor %>"
+                        <% if(i + 1 == IdolInfo.UnitID) { %> aria-expanded=true <% } %>>
                             <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png" width="20"
                                 height="20" alt="">
                             <%= IdolList[i].UnitName %>
@@ -150,36 +151,16 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active disabled cardType" href="javascript: void(0)" id="PList"
+                                <a class="nav-link active disabled" href="javascript: void(0)" id="PList"
                                     data-cardType="P">P卡列表</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link cardType" href="javascript: void(0)" id="SList"
+                                <a class="nav-link" href="javascript: void(0)" id="SList"
                                     data-cardType="S">S卡列表</a>
                             </li>
                         </ul>
                     </div>
                     <!---土屋李央好可愛喔李央--->
-                    <!--div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active cardRarity" href="javascript: void(0)" id="SSRList"
-                                    data-cardRarity="SSRCardList" data-title="SSR">SSR</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link cardRarity" href="javascript: void(0)" id="SRList"
-                                    data-cardRarity="SRCardList" data-title="SR">SR</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link cardRarity" href="javascript: void(0)" id="RList"
-                                    data-cardRarity="RCardList" data-title="R">R</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled cardRarity" href="javascript: void(0)" id="NList"
-                                    data-cardRarity="NCardList" data-title="N">N</a>
-                            </li>
-                        </ul>
-                    </div-->
                     <div class="card-body d-flex pl-0 pr-0 pb-0 container">
                         <div class="row" id="divCardProduce">
                             <h5>P_SSR</h5>
@@ -228,210 +209,73 @@
                             </div>                          
                             <% }) %>
                         </div>
-                        <div id="divCardSupport"></div>
+                        <div class="d-none row" id="divCardSupport">
+                            <h5>S_SSR</h5>
+                            <% CardList.SSSR.forEach(e => { %>
+                            <div class="col-4 pt-1 pb-1">
+                                <div class="card">
+                                    <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
+                                            </p>
+                                        </div>
+                                    </a>                                
+                                </div>  
+                            </div>                          
+                            <% }) %>
+                            <h5>S_SR</h5>
+                            <% CardList.SSR.forEach(e => { %>
+                            <div class="col-4 pt-1 pb-1">
+                                <div class="card">
+                                    <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
+                                            </p>
+                                        </div>
+                                    </a>                                
+                                </div>  
+                            </div>                          
+                            <% }) %>
+                            <h5>S_R</h5>
+                            <% CardList.SR.forEach(e => { %>
+                            <div class="col-4 pt-1 pb-1">
+                                <div class="card">
+                                    <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
+                                            </p>
+                                        </div>
+                                    </a>                                
+                                </div>  
+                            </div>                          
+                            <% }) %>
+                            <% if(CardList.SN.length) { %>
+                            <h5>S_N</h5>
+                            <% CardList.SN.forEach(e => { %>
+                            <div class="col-4 pt-1 pb-1">
+                                <div class="card">
+                                    <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
+                                            </p>
+                                        </div>
+                                    </a>                                
+                                </div>  
+                            </div>                          
+                            <% }) %>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="d-none">
-        <table class="table d-inline-block w-100">
-            <tbody class="w-100">
-                <tr>
-                    <td scope="row" class="col-md-1">姓名</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.IdolName %>
-                    </td>
-                    <td scope="row" class="col-md-1">生日</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Birthday %>
-                    </td>
-                    <td scope="row" class="col-md-1">慣用手</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.UsedHand %>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="col-md-1"></td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Hiragana %>
-                    </td>
-                    <td scope="row" class="col-md-1">星座</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.StarSign %>
-                    </td>
-                    <td scope="row" class="col-md-1">靈感</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Hirameki %>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="col-md-1">團體</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.UnitName %>
-                    </td>
-                    <td scope="row" class="col-md-1">興趣</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Interest %>
-                    </td>
-                    <td scope="row" class="col-md-1">代表色</td>
-                    <td class="col-md-3">
-                        <div class="color-box d-inline-block" id="idolColorBox" <% if(IdolInfo) { %>
-                            style = background-color:<%= IdolInfo.Color1 %>;height:10px;width:10px;
-                                <% } %>
-                                    ></div>
-                        <div class="d-inline-block">
-                            <%= IdolInfo.Color1 %>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="col-md-1">年齡</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Age %>
-                    </td>
-                    <td scope="row" class="col-md-1">特技</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.SpecialSkill %>
-                    </td>
-                    <td class="col-md-4" colspan="2" rowspan="4"></td>
-                </tr>
-                <tr>
-                    <td scope="row" class="col-md-1">身高</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Height + "公分" %>
-                    </td>
-                    <td scope="row" class="col-md-1">血型</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.BloodType %>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="col-md-1">體重</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.Weight + "公斤" %>
-                    </td>
-                    <td scope="row" class="col-md-1">出生地</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.BirthPlace %>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="col-md-1">三圍</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.ThreeSize %>
-                    </td>
-                    <td scope="row" class="col-md-1">CV</td>
-                    <td class="col-md-3">
-                        <%= IdolInfo.CV %>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="d-none">
-        <div class="w-50 col-md-4 d-inline-block container h-100">
-            <ul class="text-left list-group overflow-auto cardList" id="PSSRCardList">
-                <% for(let k=0; k < CardList.PSSR.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement disabled"
-                            data-picture="<%= CardList.PSSR[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.PSSR[k].CardUUID %>"
-                            data-cardname="<%= CardList.PSSR[k].CardName %>">
-                            <%= CardList.PSSR[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-                        <!--li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【アイドルロード】櫻木真乃</a></li>
-                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ほわっとスマイル】櫻木真乃</a></li>
-                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ハ♡トフェルトゥギフト】櫻木真乃</a></li>
-                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【はじけてスマイル】櫻木真乃</a></li>
-                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【深染め、いろみぐさ】櫻木真乃</a></li>
-                <li><a href="" class="nav-link pl-2 pt-1 pb-1 list-group-item">【ソラを跳ね】櫻木真乃</a></li-->
-            </ul>
-            <ul class="text-left list-group d-none overflow-auto cardList" id="PSRCardList">
-                <% for(let k=0; k < CardList.PSR.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement disabled"
-                            data-picture="<%= CardList.PSR[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.PSR[k].CardUUID %>"
-                            data-cardname="<%= CardList.PSR[k].CardName %>">
-                            <%= CardList.PSR[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-            </ul>
-            <ul class="text-left list-group d-none overflow-auto cardList" id="PRCardList">
-                <% for(let k=0; k < CardList.PR.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement disabled"
-                            data-picture="<%= CardList.PR[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.PR[k].CardUUID %>"
-                            data-cardname="<%= CardList.PR[k].CardName %>">
-                            <%= CardList.PR[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-            </ul>
-            <ul class="text-left list-group d-none overflow-scroll cardList h-auto" id="SSSRCardList">
-                <% for(let k=0; k < CardList.SSSR.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement"
-                            data-picture="<%= CardList.SSSR[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.SSSR[k].CardUUID %>"
-                            data-cardname="<%= CardList.SSSR[k].CardName %>">
-                            <%= CardList.SSSR[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-            </ul>
-            <ul class="text-left list-group d-none overflow-auto cardList" id="SSRCardList">
-                <% for(let k=0; k < CardList.SSR.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement"
-                            data-picture="<%= CardList.SSR[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.SSR[k].CardUUID %>"
-                            data-cardname="<%= CardList.SSR[k].CardName %>">
-                            <%= CardList.SSR[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-            </ul>
-            <ul class="text-left list-group d-none overflow-auto cardList" id="SRCardList">
-                <% for(let k=0; k < CardList.SR.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement"
-                            data-picture="<%= CardList.SR[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.SR[k].CardUUID %>"
-                            data-cardname="<%= CardList.SR[k].CardName %>">
-                            <%= CardList.SR[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-            </ul>
-            <ul class="text-left list-group d-none overflow-auto cardList" id="SNCardList">
-                <% for(let k=0; k < CardList.SN.length; k++) { %>
-                    <li>
-                        <a href="#" class="nav-link pl-2 pt-1 pb-1 list-group-item cardElement"
-                            data-picture="<%= CardList.SN[k].BigPic1 %>"
-                            data-carduuid="<%= CardList.SN[k].CardUUID %>"
-                            data-cardname="<%= CardList.SN[k].CardName %>">
-                            <%= CardList.SN[k].CardName %>
-                        </a>
-                    </li>
-                    <% } %>
-            </ul>
-        </div>
-        <div class="w-50 col-md-8 d-inline-block mh-100">
-            <a href="<%= `/info/PCardInfo?UUID=${CardList.PSSR[0].CardUUID}` %>" class="text-center"
-                id="cardInfoLinkImg">
-                <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR[0].BigPic1 %>"
-                    alt="" class="img-fluid" id="cardPicture">
-            </a>
-            <a href="<%= `/info/PCardInfo?UUID=${CardList.PSSR[0].CardUUID}` %>" class="text-center"
-                id="cardInfoLink">
-                <%=CardList.PSSR[0].CardName%>
-            </a>
         </div>
     </div>
 </body>
