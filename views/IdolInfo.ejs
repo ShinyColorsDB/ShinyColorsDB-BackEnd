@@ -245,7 +245,9 @@
                             </ul>
                         </div>
                         <div class="w-50 col-md-8 d-inline-block mh-100">
-                            <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR[0].BigPic1 %>" alt="" class="img-fluid" id="cardPicture">
+                            <a href="<%= `/info/PCardInfo?UUID=${CardList.PSSR[0].CardUUID}` %>" class="text-center" id="cardInfoLinkImg">
+                                <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR[0].BigPic1 %>" alt="" class="img-fluid" id="cardPicture">
+                            </a>
                             <a href="<%= `/info/PCardInfo?UUID=${CardList.PSSR[0].CardUUID}` %>" class="text-center" id="cardInfoLink"><%=CardList.PSSR[0].CardName%></a>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-<!DOCTYPE htms>
+<!DOCTYPE html>
 
 <html class="h-100 w-100" lang="zh-Hant-tw">
 
@@ -61,8 +61,9 @@
                 <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded" data-bs-toggle="collapse"
                     data-bs-target="#divIdolUnitList">角色列表</a>
                 <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
-                    <% for(let i=0; i < IdolList.length; i++) { %>
-                        <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>>
+                    <% for(let i = 0; i < IdolList.length; i++) { %>
+                        <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %> style="background-color: <%= IdolList[i].UnitColor %>">
+                            <img src="https://static.shinycolors.moe/pictures/unitIcon/<%= i + 1 %>.png" alt="">
                             <%= IdolList[i].UnitName %>
                         </a>
                         <div class="<% if(i + 1 == IdolInfo.UnitID) { %> list-group <% } else { %> list-group collapse <% } %>"

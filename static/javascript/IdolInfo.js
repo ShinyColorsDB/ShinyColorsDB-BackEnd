@@ -5,9 +5,11 @@ $(function() {
         $("#cardPicture").attr("src", `https://static.shinycolors.moe/pictures/bigPic/${pic}`);
         if ($("#PList").hasClass("active")) {
             $('#cardInfoLink').attr("href", `/info/PCardInfo?UUID=${link}`).text(name);
+            $('#cardInfoLinkImg').attr("href", `/info/PCardInfo?UUID=${link}`);
         }
         else {
             $('#cardInfoLink').attr("href", `/info/SCardInfo?UUID=${link}`).text(name);
+            $('#cardInfoLinkImg').attr("href", `/info/SCardInfo?UUID=${link}`);
         }
     });
 

@@ -55,7 +55,7 @@
                     <% } else { %> 
                         list-group collapse
                     <% } %>"
-                        id=<%= `unit${i + 1}` %>>
+                        id=<%= `unit${i + 1}` %> >
                         <% for(let k = 0; k < IdolList[i].Idols.length; k++) { %>
                             <a href=<%= `/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %> 
                                 class=" <% if(IdolList[i].Idols[k].IdolID == IdolInfo.IdolID) { %> 
