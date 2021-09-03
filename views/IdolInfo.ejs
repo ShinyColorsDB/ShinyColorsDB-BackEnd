@@ -18,9 +18,9 @@
     <meta property="og:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="og:title" content="<%= IdolInfo.IdolName %>">
     <meta property="og:description" content="
-姓名: <%= IdolInfo.IdolName %>      身高: <%= IdolInfo.Height %>
-生日: <%= IdolInfo.Birthday %>      體重: <%= IdolInfo.Weight %>
-團體: <%= IdolInfo.UnitName %>      三圍: <%= IdolInfo.ThreeSize %>">
+姓名: <%= IdolInfo.IdolName %>  身高: <%= IdolInfo.Height %>
+生日: <%= IdolInfo.Birthday %>  體重: <%= IdolInfo.Weight %>
+團體: <%= IdolInfo.UnitName %>  三圍: <%= IdolInfo.ThreeSize %>">
     <meta property="og:image"
         content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
     <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
@@ -29,9 +29,9 @@
     <meta property="twitter:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="twitter:title" content="<%= IdolInfo.IdolName %>">
     <meta property="twitter:description" content="
-姓名: <%= IdolInfo.IdolName %>      身高: <%= IdolInfo.Height %>
-生日: <%= IdolInfo.Birthday %>      體重: <%= IdolInfo.Weight %>
-團體: <%= IdolInfo.UnitName %>      三圍: <%= IdolInfo.ThreeSize %>">
+姓名: <%= IdolInfo.IdolName %>  身高: <%= IdolInfo.Height %>
+生日: <%= IdolInfo.Birthday %>  體重: <%= IdolInfo.Weight %>
+團體: <%= IdolInfo.UnitName %>  三圍: <%= IdolInfo.ThreeSize %>">
     <meta property="twitter:image"
         content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
 
@@ -61,9 +61,9 @@
                     <a href="#" class="list-group-item" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>
                         style="background-color: <%= IdolList[i].UnitColor %>"
                         <% if(i + 1 == IdolInfo.UnitID) { %> aria-expanded=true <% } %>>
-                            <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png" width="20"
-                                height="20" alt="">
-                            <%= IdolList[i].UnitName %>
+                        <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png" width="20"
+                            height="20" alt="">
+                        <%= IdolList[i].UnitName %>
                     </a>
                     <div class="<% if(i + 1 == IdolInfo.UnitID) { %> list-group <% } else { %> list-group collapse <% } %>"
                         id=<%=`unit${i + 1}` %>>
