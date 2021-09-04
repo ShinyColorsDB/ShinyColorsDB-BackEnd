@@ -403,11 +403,21 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><%= IdeaMark.IdeaMark %></td>
-                                    <td><%= IdolInfo.Hirameki %></td>
+                                    <td>
+                                        <img src="https://static.shinycolors.moe/pictures/uiIcons/icon_idea_mark_<%=IdeaMark.IdeaMark%>_lv_1.png"
+                                            alt="" width="30" height="34">
+                                        <%= IdeaMark.IdeaName %>
+                                    </td>
+                                    <td>
+                                        <img src="https://static.shinycolors.moe/pictures/uiIcons/produce_inspiration_m_<%=IdolInfo.HiraName%>.png"
+                                            alt="" width="30" height="30">
+                                        <%= IdolInfo.Hirameki %>
+                                    </td>
                                     <td>
                                         <% Proficiency.forEach(element => { %>
-                                            <%= element.Proficiency %>  
+                                            <img src="https://static.shinycolors.moe/pictures/uiIcons/icon_proficiency_<%=element.Proficiency%>.png"
+                                                alt="" width="30" height="30">
+                                            <%= element.ProfName %>  
                                         <% }) %>
                                         </td>
                                 </tr>

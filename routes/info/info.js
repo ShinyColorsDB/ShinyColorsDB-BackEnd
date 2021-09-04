@@ -47,7 +47,7 @@ info.get("/PCardInfo", async (req, res, next) => {
 info.get("/SCardInfo", async (req, res) => {
     if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
 
-    const [ListByGroup, List] = await DBGetIdolList();    
+    const [ListByGroup, List] = await DBGetIdolList();
     const [Panel, IdolID] = await DBGetSCardPanel(req.query.UUID);
     if (!IdolID) { 
         res.sendStatus(404);
@@ -57,6 +57,20 @@ info.get("/SCardInfo", async (req, res) => {
         e.PanelDesc = e.PanelDesc.replace(/\n/g, "<br>");
     });
     const IdolInfo = await DBGetIdolInfo(IdolID);
+    switch(IdolInfo.Hirameki) {
+        case "Vo": 
+            IdolInfo.HiraName = "vocal";
+            break;
+        case "Da": 
+            IdolInfo.HiraName = "dance";
+            break;
+        case "Vi": 
+            IdolInfo.HiraName = "visual"
+            break;
+        case "Me": 
+            IdolInfo.HiraName = "mental"
+            break;
+    }
     const CardInfo = await DBGetSCardInfo(req.query.UUID);
     switch(CardInfo.GetMethod) {
         case "Events": 
@@ -76,38 +90,38 @@ info.get("/SCardInfo", async (req, res) => {
     const IdeaMark = await DBGetIdeaMark(req.query.UUID);
     switch(IdeaMark.IdeaMark) {
         case "skill_point":
-            IdeaMark.IdeaMark = "アピール";
+            IdeaMark.IdeaName = "アピール";
             break;
         case "mental":
-            IdeaMark.IdeaMark = "トーク";
+            IdeaMark.IdeaName = "トーク";
             break;
         case "visual":
-            IdeaMark.IdeaMark = "ビジュアル";
+            IdeaMark.IdeaName = "ビジュアル";
             break;
         case "dance":
-            IdeaMark.IdeaMark = "ダンス";
+            IdeaMark.IdeaName = "ダンス";
             break;
         case "vocal":
-            IdeaMark.IdeaMark = "ボーカル";
+            IdeaMark.IdeaName = "ボーカル";
             break;
     }
     const Proficiency = await DBGetProficiency(req.query.UUID);
     Proficiency.forEach(element => {
         switch(element.Proficiency) {
             case "sing_ability": 
-                element.Proficiency = "歌唱力";
+                element.ProfName = "歌唱力";
                 break;
             case "feel_stable":
-                element.Proficiency = "安定感";
+                element.ProfName = "安定感";
                 break;
             case "teamwork":
-                element.Proficiency = "團結力";
+                element.ProfName = "團結力";
                 break;
             case "concentration":
-                element.Proficiency = "集中力";
+                element.ProfName = "集中力";
                 break;
             case "expressive_power":
-                element.Proficiency = "表現力";
+                element.ProfName = "表現力";
                 break;
         }
     });
