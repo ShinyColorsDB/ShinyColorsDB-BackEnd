@@ -7,6 +7,7 @@ let logger = require('morgan');
 const spineRouter = require('./routes/api/spines.js');
 const generalRouter = require('./routes/api/general.js');
 const infoRouter = require('./routes/info/info.js');
+const siteMapRouter = require('./routes/api/sitemap.js');
 
 let app = express();
 
@@ -22,6 +23,7 @@ app.use('/static', express.static(__dirname + '/static'));
 app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
 app.use("/info", infoRouter);
+app.use("/sitemap", siteMapRouter);
 
 app.disable('x-powered-by');
 

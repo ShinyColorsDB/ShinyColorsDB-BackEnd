@@ -42,7 +42,6 @@
 </head>
 
 <body class="h-100" onload="Init();">
-    <!--黒木ほのか好婆喔ほのけ-->
     <div class="container-fluid d-flex p-0 h-100">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-2 list-group"
             id="divSidebar">
@@ -76,8 +75,8 @@
                                 list-group-item ps-4 list-group-item-action
                                 <% } %>">
                                 <img src="https://static.shinycolors.moe/pictures/smlIcon/<% if(IdolList[i].Idols[k].IdolID < 10) { %>0<%=IdolList[i].Idols[k].IdolID%><% } else { %><%=IdolList[i].Idols[k].IdolID%><% } %>.png"
-                                    width="40" height="40" alt="">
-                                <%= IdolList[i].Idols[k].IdolName %>
+                                    width="40" height="40" alt="" class="d-inline-block">
+                                <h6 class="d-inline-block"><%= IdolList[i].Idols[k].IdolName %></h6>
                             </a>
                             <% } %>
                     </div>
@@ -144,7 +143,6 @@
                 </table>
             </div>
         </div>
-        <!---KRAZ好婆喔KRAZ--->
         <div class="d-flex flex-column flex-shrink-0 p-3 d-inline-block col-8 h-100" id="divInfo">
             <div class="d-flex w-100 h-100">
                 <div class="card text-center w-100 overflow-auto" id="idolCards">
@@ -160,7 +158,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!---土屋李央好可愛喔李央--->
                     <div class="card-body d-flex pl-0 pr-0 pb-0 container">
                         <div class="row" id="divCardProduce">
                             <h5>P_SSR</h5>

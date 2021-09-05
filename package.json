@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "lint": "eslint routes/*/*.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,5 +17,8 @@
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
     "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
   }
 }

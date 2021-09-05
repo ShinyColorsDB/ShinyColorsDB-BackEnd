@@ -2,7 +2,7 @@ const express = require('express');
 const cache = require("node-cache");
 const info = express.Router();
 const date = require("date-fns");
-const cvCache = new cache();
+//const cvCache = new cache();
 
 const conn = require('../../db/db.js');
 
@@ -264,12 +264,6 @@ function DBGetSCardInfo(CardUUID) {
             result[0].ReleaseDate = date.format(new Date(result[0].ReleaseDate), 'MM/dd/yyyy');
             res(result[0]);
         });
-    });
-}
-
-function DBGetProperty(CardUUID) {
-    return new Promise((res, rej) => {
-        conn.execute("SELECT a.")
     });
 }
 

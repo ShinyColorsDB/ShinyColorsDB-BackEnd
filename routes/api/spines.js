@@ -2,7 +2,7 @@ const express = require('express');
 const spines = express.Router();
 
 let conn = require('../../db/db');
-
+// /spines/idolList
 spines.get("/idolList", (req, res, next) => {
     console.log(req.get("x-forwarded-for"));
     let data = new Array();
@@ -13,13 +13,13 @@ spines.get("/idolList", (req, res, next) => {
         res.send(data);
     });
 });
-
+// /spines/dressList/{IdolID}
 spines.get("/dressList/:IdolID", (req, res, next) => {
     conn.query("SELECT * FROM `20-IdolDresses` WHERE `IdolID` = ? ORDER BY FIELD (`DressType`, \"P_SSR\", \"P_SR\", \"Anniversary\", \"Mizugi\", \"Special\", \"FesReward\", \"Other\"), `DressOrder`", [req.params.IdolID], (err, result) => {
         res.send(result);
     });
 });
-
+// /spines/updateLog
 spines.get("/updateLog", (req, res, next) => {
     conn.query("SELECT `Date`, `Content` FROM `21-SpineLog` ORDER BY `LogIndex` DESC LIMIT 5", (err, result) => {
         result.forEach(element => {
