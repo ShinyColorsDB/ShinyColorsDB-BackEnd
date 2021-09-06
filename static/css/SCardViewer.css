@@ -128,3 +128,8 @@
     background-color: #b3b3b3;
     border-radius: 100px;
 }
+
+.carousel-control-prev,
+.carousel-control-next {
+    align-items: flex-start;; /* Aligns it at the top */
+}
