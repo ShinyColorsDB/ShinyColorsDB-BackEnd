@@ -8,6 +8,7 @@ const spineRouter = require('./routes/api/spines.js');
 const generalRouter = require('./routes/api/general.js');
 const infoRouter = require('./routes/info/info.js');
 const siteMapRouter = require('./routes/api/sitemap.js');
+const simulatorRouter = require('./routes/simulate/simulate.js');
 
 let app = express();
 
@@ -24,6 +25,7 @@ app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
 app.use("/info", infoRouter);
 app.use("/sitemap", siteMapRouter);
+app.use("/simulator", simulatorRouter);
 
 app.disable('x-powered-by');
 

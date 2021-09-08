@@ -38,6 +38,13 @@ general.get("/getIdolInfo/:IdolID", async (req, res) => {
     res.send(IdolInfo);
 });
 
+general.get("/getCardList", async (request, response) => {
+    console.log(request.url);
+    const CardList = await DBGetAllCardList();
+
+    response.send(CardList);
+});
+
 general.get("/getPCardInfo", async (req, res) => {
     res.send(req.query.cardUUID);
 });
@@ -68,6 +75,15 @@ function DBGetCardList(IdolID) {
         conn.execute("SELECT * FROM `3-IdolCards` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardID`", [IdolID], (err, result) => {
             if (err) throw err;
             res(result);
+        });
+    });
+}
+
+function DBGetAllCardList() {
+    return new Promise((resolve, reject) => {
+        conn.execute("SELECT a.CardName, a.CardUUID, a.BigPic2, a.SmallPic, a.CardType FROM `3-IdolCards` a ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `IdolID`", [], (err, result) => {
+            if (err) throw err;
+            resolve(result);
         });
     });
 }

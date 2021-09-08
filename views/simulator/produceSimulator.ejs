@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="h-100 w-100" lang="zh-Hant-tw">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="/static/javascript/produceSimulator.js"></script>
+    <link rel="stylesheet" href="/static/css/default.css">
+
+    <title>
+        Produce組隊模擬器-ShinyColorsDB
+    </title>
+
+</head>
+
+<body class="h-100" onload="Init();">
+    <div class="container-fluid d-flex p-0 h-100">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-2 accordion accordion-flush"
+            id="divSidebar">
+            <div class="accordion-item rounded-top">
+                <h2 class="accordion-header" id="descHomePage">
+                    <button class="accordion-button collapsed rounded-top" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#divMainList" aria-expanded="false" aria-controls="divMainList">
+                        首頁
+                    </button>
+                </h2>
+                <div id="divMainList" class="accordion-collapse collapse" aria-labelledby="descHomePage" data-bs-parent="#divSidebar">
+                    <div class="accordion-body p-0 list-group">
+                        <button class="w-100 rounded list-group-item text-start">ShinyColorsDB</button>
+                        <button class="w-100 rounded list-group-item text-start">最新情報</button>
+                        <button class="w-100 rounded list-group-item text-start">無限期招募前端大師= =</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item overflow-auto">
+                <h2 class="accordion-header" id="descUnit">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#divIdolUnitList"
+                        aria-expanded="true" aria-controls="divIdolUnitList">
+                        角色列表
+                    </button>
+                </h2>
+                
+                <div class="accordion-collapse collapse show" id="divIdolUnitList" aria-labelledby="descUnit" data-bs-parent="#divSidebar">
+                    <% for(let i=0; i < IdolList.length; i++) { %>
+                        <button href="#" class="list-group-item w-100 text-start" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>
+                            style="background-color: <%= IdolList[i].UnitColor %>">
+                            <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png"
+                                width="20" height="20" alt="">
+                            <%= IdolList[i].UnitName %>
+                        </button>
+                        <div class="list-group collapse" id=<%=`unit${i + 1}` %>>
+                            <% for(let k=0; k < IdolList[i].Idols.length; k++) { %>
+                            <a href=<%=`/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %>
+                                class="ps-4 list-group-item-action list-group-item">
+                                <img src="https://static.shinycolors.moe/pictures/smlIcon/<% if(IdolList[i].Idols[k].IdolID < 10) { %>0<%=IdolList[i].Idols[k].IdolID%><% } else { %><%=IdolList[i].Idols[k].IdolID%><% } %>.png"
+                                    width="40" height="40" alt="" class="d-inline-block">
+                                <h6 class="d-inline-block">
+                                    <%= IdolList[i].Idols[k].IdolName %>
+                                </h6>
+                            </a>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            <a href="https://spine.shinycolors.moe" class="p-2 bg-light text-dark rounded-bottom">
+                服裝Live2d~~
+            </a>
+        </div>
+        <div class="d-inline-block container row mt-3">
+            <h3>Produce組隊模擬器~~</h3>
+            <div class="col-8">
+                <h5>P:</h5>
+                <div class="card">
+                    <div class="row align-items-center" id="PCard">
+                        <div class="col-2">
+                            <button type="button" class="btn-outline-light btn columnBtn" data-bs-toggle="modal" data-bs-target="#PIconModal">
+                                <img src="https://static.shinycolors.moe/pictures/smlPic/b1f91422-0a22-11ec-a6f3-96849d1d1003.png">
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-title">【ピトス・エルピス】樋口円香</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/1107_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/1107_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/1107_4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <h5>S:</h5>
+                <div class="card">
+                    <div class="row align-items-center" id="SCard1">
+                        <div class="col-2">
+                            <button type="button" class="btn-outline-light btn columnBtn" data-bs-toggle="modal" data-bs-target="#SIconModal">
+                                <img src="https://static.shinycolors.moe/pictures/smlPic/b1f92204-0a22-11ec-a6f3-96849d1d1003.png">
+                            </button>
+                        </div>
+                        <div class="col-6 justify-content-center">
+                            <h5 class="card-title">【秋の実りの配達係】芹沢あさひ</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row align-items-center" id="SCard2">
+                        <div class="col-2">
+                            <button type="button" class="btn-outline-light btn columnBtn" data-bs-toggle="modal" data-bs-target="#SIconModal">
+                                <img src="https://static.shinycolors.moe/pictures/smlPic/71359b00-9af0-474c-8c62-c3d4e8f06063.png">
+                            </button>
+                        </div>
+                        <div class="col-6 justify-content-center">
+                            <h5 class="card-title">【スパイシーベリィデコレイト】黛冬優子</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row align-items-center" id="SCard3">
+                        <div class="col-2">
+                            <button type="button" class="btn-outline-light btn columnBtn" data-bs-toggle="modal" data-bs-target="#SIconModal">
+                                <img src="https://static.shinycolors.moe/pictures/smlPic/7bb547be-5379-4229-97b7-4aac796c4c9d.png">
+                            </button>
+                        </div>
+                        <div class="col-6 justify-content-center">
+                            <h5 class="card-title">【Cherry Jelly】大崎甘奈</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row align-items-center" id="SCard4">
+                        <div class="col-2">
+                            <button type="button" class="btn-outline-light btn columnBtn" data-bs-toggle="modal" data-bs-target="#SIconModal">
+                                <img src="https://static.shinycolors.moe/pictures/smlPic/ef92de0c-9e13-42f1-bf99-80ed39604aa0.png">
+                            </button>
+                        </div>
+                        <div class="col-6 align-middle">
+                            <h5 class="card-title">【闇鍋上等】田中摩美々</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row align-items-center" id="GCard">
+                        <div class="col-2">
+                            <button type="button" class="btn-outline-light btn columnBtn" data-bs-toggle="modal" data-bs-target="#SIconModal">
+                                <img src="https://static.shinycolors.moe/pictures/smlPic/8173fe0e-d74c-489f-9256-7a36e34f7339.png">
+                            </button>
+                        </div>
+                        <div class="col-6 justify-content-center">
+                            <h5 class="card-title">【うち来る～！？】和泉愛依</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                            <img src="https://static.shinycolors.moe/pictures/exSkillIcon/2103_4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="PIconModal" tabindex="-1" aria-labelledby="PIconModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="PIconModalLabel">選擇P卡</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body row" id="PIconAria">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="SIconModal" tabindex="-1" aria-labelledby="SIconModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="SIconModalLabel">選擇S卡</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body row" id="SIconAria">                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

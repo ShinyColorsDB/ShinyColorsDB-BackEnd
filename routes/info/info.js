@@ -14,7 +14,7 @@ info.get("/IdolInfo", async (req, res, next) => {
 
     const CardList = await DBGetCardList(req.query.IdolID);
 
-    res.render('IdolInfo', {
+    res.render('info/IdolInfo', {
         IdolList: ListByGroup,
         Img: GenerateImgObj(List[req.query.IdolID - 1].IdolNick),
         IdolInfo: IdolInfo,
@@ -35,7 +35,7 @@ info.get("/PCardInfo", async (req, res, next) => {
     //console.log(Panel);
 
 
-    res.render('PCardViewer', {
+    res.render('info/PCardViewer', {
         IdolList: ListByGroup,
         SkillPanel: Panel,
         IdolInfo: IdolInfo,
@@ -126,7 +126,7 @@ info.get("/SCardInfo", async (req, res) => {
         }
     });
 
-    res.render('SCardViewer', {
+    res.render('info/SCardViewer', {
         IdolList: ListByGroup,
         SkillPanel: Panel,
         IdolInfo: IdolInfo,

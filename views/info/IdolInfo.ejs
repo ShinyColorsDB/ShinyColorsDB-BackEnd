@@ -11,16 +11,16 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/static/css/IdolInfo.css">
+    <link rel="stylesheet" href="/static/css/default.css">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="og:title" content="<%= IdolInfo.IdolName %>">
     <meta property="og:description" content="
-姓名: <%= IdolInfo.IdolName %>  身高: <%= IdolInfo.Height %>
-生日: <%= IdolInfo.Birthday %>  體重: <%= IdolInfo.Weight %>
-團體: <%= IdolInfo.UnitName %>  三圍: <%= IdolInfo.ThreeSize %>">
+    姓名: <%= IdolInfo.IdolName %>身高: <%= IdolInfo.Height %>
+    生日: <%= IdolInfo.Birthday %>體重: <%= IdolInfo.Weight %>
+    團體: <%= IdolInfo.UnitName %>三圍: <%= IdolInfo.ThreeSize %>">
     <meta property="og:image"
         content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
     <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
@@ -29,9 +29,9 @@
     <meta property="twitter:url" content="https://shinycolors.moe/info/IdolInfo?IdolID=<%= IdolInfo.IdolID %>">
     <meta property="twitter:title" content="<%= IdolInfo.IdolName %>">
     <meta property="twitter:description" content="
-姓名: <%= IdolInfo.IdolName %>  身高: <%= IdolInfo.Height %>
-生日: <%= IdolInfo.Birthday %>  體重: <%= IdolInfo.Weight %>
-團體: <%= IdolInfo.UnitName %>  三圍: <%= IdolInfo.ThreeSize %>">
+    姓名: <%= IdolInfo.IdolName %>身高: <%= IdolInfo.Height %>
+    生日: <%= IdolInfo.Birthday %>體重: <%= IdolInfo.Weight %>
+    團體: <%= IdolInfo.UnitName %>三圍: <%= IdolInfo.ThreeSize %>">
     <meta property="twitter:image"
         content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
 
@@ -172,7 +172,8 @@
                     </div>
                     <div class="card-body d-flex pl-0 pr-0 pb-0 container">
                         <div class="row" id="divCardProduce">
-                            <h5>P_SSR</h5>
+                            <% if(CardList.PSSR.length) { %>
+                            <h5 class="text-start">P_SSR</h5>
                             <% CardList.PSSR.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -183,11 +184,13 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
+                                    </a>
                                 </div>  
-                            </div>                          
+                            </div>
                             <% }) %>
-                            <h5>P_SR</h5>
+                            <% } %>
+                            <% if(CardList.PSR.length) { %>
+                            <h5 class="text-start">P_SR</h5>
                             <% CardList.PSR.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -198,11 +201,12 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
+                                    </a>
                                 </div>  
-                            </div>                          
-                            <% }) %>
-                            <h5>P_R</h5>
+                            </div>      
+                            <% }) %>                    
+                            <% } %>
+                            <h5 class="text-start">P_R</h5>
                             <% CardList.PR.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -213,13 +217,14 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
+                                    </a>
                                 </div>  
-                            </div>                          
+                            </div>
                             <% }) %>
                         </div>
                         <div class="d-none row" id="divCardSupport">
-                            <h5>S_SSR</h5>
+                            <% if(CardList.SSSR.length) { %>
+                            <h5 class="text-start">S_SSR</h5>
                             <% CardList.SSSR.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -230,11 +235,13 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
+                                    </a>
                                 </div>  
-                            </div>                          
+                            </div>
                             <% }) %>
-                            <h5>S_SR</h5>
+                            <% } %>
+                            <% if(CardList.SSR.length) { %>
+                            <h5 class="text-start">S_SR</h5>
                             <% CardList.SSR.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -245,11 +252,13 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
+                                    </a>
                                 </div>  
-                            </div>                          
+                            </div>
                             <% }) %>
-                            <h5>S_R</h5>
+                            <% } %>
+                            <% if(CardList.SR.length) { %>
+                            <h5 class="text-start">S_R</h5>
                             <% CardList.SR.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -260,12 +269,13 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
-                                </div>  
-                            </div>                          
+                                    </a>
+                                </div>
+                            </div>
                             <% }) %>
+                            <% } %>
                             <% if(CardList.SN.length) { %>
-                            <h5>S_N</h5>
+                            <h5 class="text-start">S_N</h5>
                             <% CardList.SN.forEach(e => { %>
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
@@ -276,9 +286,9 @@
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
                                             </h5>
                                         </div>
-                                    </a>                                
+                                    </a>
                                 </div>  
-                            </div>                          
+                            </div>
                             <% }) %>
                             <% } %>
                         </div>
