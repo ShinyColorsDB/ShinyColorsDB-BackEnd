@@ -8,7 +8,7 @@ simulate.get("/produceSimulator", async (request, response) => {
 
     const [ListByGroup, List] = await DBGetIdolList();
 
-    response.render('simulator/produceSimulator', {
+    response.render('simulator/ProduceSimulator', {
         IdolList: ListByGroup
     });
 });

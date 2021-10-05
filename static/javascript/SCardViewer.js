@@ -3,6 +3,4 @@ function Init() {
     popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl, { html: true })
     });
-
-    
 }

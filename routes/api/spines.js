@@ -2,7 +2,18 @@ const express = require('express');
 const spines = express.Router();
 const fns = require("date-fns-tz");
 
-let conn = require('../../db/db');
+const conn = require('../../db/db');
+
+spines.use((req, res, next) => {
+    console.log(req.get("host"), req.get("origin"));
+    if(req.get("origin").match(/spine\.shinycolors\.moe/)) {
+        next();
+    }
+    else {
+        res.sendStatus(403);
+    }
+});
+
 // /spines/idolList
 spines.get("/idolList", (req, res, next) => {
     console.log(req.get("x-forwarded-for"));
