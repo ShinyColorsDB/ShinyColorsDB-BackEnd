@@ -5,12 +5,11 @@ const fns = require("date-fns-tz");
 const conn = require('../../db/db');
 
 spines.use((req, res, next) => {
-    console.log(req.get("host"), req.get("origin"));
-    if(req.get("origin").match(/spine\.shinycolors\.moe/)) {
-        next();
+    if(!req.get("origin") || !req.get("origin").match(/spine\.shinycolors\.moe/)) {
+        res.sendStatus(403);
     }
     else {
-        res.sendStatus(403);
+        next();
     }
 });
 
