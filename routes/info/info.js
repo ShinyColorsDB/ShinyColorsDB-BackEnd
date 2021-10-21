@@ -82,6 +82,8 @@ info.get("/SCardInfo", async (req, res) => {
         case "GeneralGasha":
             CardInfo.GetMethod = "常駐卡池";
             break;
+        case "FesReware":
+            CardInfo.GetMethod = "天梯兌換";
         default:
             break;
     }
