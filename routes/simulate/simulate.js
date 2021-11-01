@@ -5,6 +5,7 @@ const date = require("date-fns");
 const conn = require('../../db/db.js');
 
 simulate.get("/produceSimulator", async (request, response) => {
+    console.log("testing")
 
     const [ListByGroup, List] = await DBGetIdolList();
 
