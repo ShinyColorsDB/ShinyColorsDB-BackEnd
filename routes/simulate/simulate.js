@@ -4,12 +4,12 @@ const date = require("date-fns");
 
 const conn = require('../../db/db.js');
 
-simulate.get("/produceSimulator", async (request, response, next) => {
+simulate.get("/pSimulator", async (request, response, next) => {
     console.log("testing")
 
     const [ListByGroup, List] = await DBGetIdolList();
 
-    response.render('simulator/ProduceSimulator', {
+    response.render('simulate/PSimulator', {
         IdolList: ListByGroup
     });
 });
