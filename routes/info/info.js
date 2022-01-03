@@ -23,8 +23,8 @@ info.get("/IdolInfo", async (req, res, next) => {
 });
 
 info.get("/PCardInfo", async (req, res, next) => {
-    res.redirect("./IdolInfo?IdolID=1");
-    return;
+    //res.redirect("./IdolInfo?IdolID=1");
+    //return;
     if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
 
     const [ListByGroup, List] = await DBGetIdolList();
@@ -148,7 +148,7 @@ module.exports = info;
 
 function DBGetIdolList() {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, a.`NickName`, a.`Color1`, b.`UnitHiragana`, b.`Color1` FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`", [], (err, result) => {
+        conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, a.`NickName`, a.`Color1`, b.`UnitHiragana`, b.`Color1` FROM `SCDB_Idols` AS a, `SCDB_Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`", [], (err, result) => {
             if (err) throw err;
             const ListByGroup = new Array(), List = new Array();
             result.forEach(element => {
@@ -169,7 +169,7 @@ function DBGetIdolList() {
 
 function DBGetIdolInfo(IdolID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`IdolID` = ? AND a.`UnitID` = b.`UnitID` LIMIT 1", [IdolID], (err, result) => {
+        conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `SCDB_Idols` AS a, `SCDB_Units` AS b WHERE a.`IdolID` = ? AND a.`UnitID` = b.`UnitID` LIMIT 1", [IdolID], (err, result) => {
             if (err) throw err;
             res(result[0]);
         });
@@ -178,7 +178,7 @@ function DBGetIdolInfo(IdolID) {
 
 function DBGetCardList(IdolID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT * FROM `3-IdolCards` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardIndex`", [IdolID], (err, result) => {
+        conn.execute("SELECT * FROM `SCDB_CardList` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardIndex`", [IdolID], (err, result) => {
             if (err) throw err;
             const CardList = {
                 PSSR: [],
@@ -229,7 +229,7 @@ function GenerateImgObj(str) {
 
 function DBGetPCardPanel(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `10-CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.SkillSlot",
+        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `SCDB_CardList` AS a, `SCDB_CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.SkillSlot",
             [CardUUID],
             (err, result) => {
                 res([result, result[0].IdolID]);
@@ -239,7 +239,7 @@ function DBGetPCardPanel(CardUUID) {
 
 function DBGetSCardPanel(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `3-IdolCards` AS a, `14-CardSkillPanels` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.PanelSlot",
+        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `SCDB_CardList` AS a, `SCDB_CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.PanelSlot",
             [CardUUID],
             (err, result) => {
                 if (!result[0]?.IdolID) {
@@ -254,7 +254,7 @@ function DBGetSCardPanel(CardUUID) {
 
 function DBGetPCardInfo(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.*, b.DressUUID, b.Exist AS `DressExist` FROM `3-IdolCards` AS a, `20-IdolDresses` AS b WHERE a.CardUUID = ? AND a.DressIndex = b.DressIndex;",
+        conn.execute("SELECT a.*, b.DressUUID, b.Exist AS `DressExist` FROM `SCDB_CardList` AS a, `SCDB_IdolDress` AS b WHERE a.CardUUID = ? AND a.DressIndex = b.DressIndex;",
             [CardUUID],
             (err, result) => {
                 res(result[0]);
@@ -264,7 +264,7 @@ function DBGetPCardInfo(CardUUID) {
 
 function DBGetSCardInfo(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.* FROM `3-IdolCards` AS a WHERE a.CardUUID = ? ;",
+        conn.execute("SELECT a.* FROM `SCDB_CardList` AS a WHERE a.CardUUID = ? ;",
             [CardUUID],
             (err, result) => {
                 result[0].ReleaseDate = date.format(new Date(result[0].ReleaseDate), 'MM/dd/yyyy');
@@ -275,7 +275,7 @@ function DBGetSCardInfo(CardUUID) {
 
 function DBGetSupportSkills(CardUUID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.* FROM `16-CardSupportSkills` AS a, `3-IdolCards` AS b WHERE b.CardUUID = ? AND a.CardIndex = b.CardIndex",
+        conn.execute("SELECT a.* FROM `SCDB-CardSupportSkill` AS a, `SCDB_CardList` AS b WHERE b.CardUUID = ? AND a.CardIndex = b.CardIndex",
             [CardUUID],
             (err, result) => {
                 let tmp0 = new Map(),
@@ -319,7 +319,7 @@ function setMap(e, map) {
 
 function DBGetSupportEvents(CardUUID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.* FROM `19-CardSupportEvents` a, `3-IdolCards` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ? ORDER BY `EventID`",
+        conn.execute("SELECT a.* FROM `SCDB_CardSupportEvent` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ? ORDER BY `EventID`",
             [CardUUID],
             (err, result) => {
                 res(result);
@@ -329,7 +329,7 @@ function DBGetSupportEvents(CardUUID) {
 
 function DBGetProficiency(CardUUID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.* FROM `18-CardProficiencies` a, `3-IdolCards` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
+        conn.execute("SELECT a.* FROM `SCDB_CardProficiency` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
             [CardUUID],
             (err, result) => {
                 res(result);
@@ -339,7 +339,7 @@ function DBGetProficiency(CardUUID) {
 
 function DBGetIdeaMark(CardUUID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.* FROM `17-CardIdeaMark` a, `3-IdolCards` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
+        conn.execute("SELECT a.* FROM `SCDB_CardIdeaMark` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
             [CardUUID],
             (err, result) => {
                 res(result[0]);

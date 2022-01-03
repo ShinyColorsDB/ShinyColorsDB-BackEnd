@@ -17,7 +17,7 @@ module.exports = sitemap;
 function getCardSiteMap() {
     return new Promise((res, _) => {
         let temp = new String();
-        conn.query("SELECT a.CardUUID, a.CardType FROM `3-IdolCards` a WHERE a.CardID != 0", [], (err, result) => {
+        conn.query("SELECT a.CardUUID, a.CardType FROM `SCDB_CardList` a WHERE a.CardID != 0", [], (err, result) => {
             result.forEach(e => {
                 temp = temp.concat(`<url>\n`);
                 if(e.CardType.match(/P_/)) {
@@ -36,7 +36,7 @@ function getCardSiteMap() {
 function getIdolSiteMap() {
     return new Promise((res, _) => {
         let temp = new String();
-        conn.query("SELECT * FROM `1-Idols` WHERE `IdolID` NOT IN (0,26)", [],  (err, result) => {
+        conn.query("SELECT * FROM `SCDB_Idols` WHERE `IdolID` NOT IN (0,26)", [],  (err, result) => {
             result.forEach(e => {
                 temp = temp.concat(`<url>\n`);
                 temp = temp.concat(`<loc>https://shinycolors.moe/info/IdolInfo?IdolID=${e.IdolID}</loc>\n`);

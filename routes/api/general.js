@@ -54,7 +54,7 @@ module.exports = general;
 
 function DBGetIdolList() {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, b.`UnitHiragana` FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`",[] , (err, result) => {
+        conn.execute("SELECT a.`IdolID`, a.`IdolName`, a.`UnitID`, b.`UnitHiragana` FROM `SCDB_Idols` AS a, `SCDB_Units` AS b WHERE a.`UnitID` != 8 AND a.`UnitID` = b.`UnitID`",[] , (err, result) => {
             if (err) throw err;
             res(result);
         });
@@ -63,7 +63,7 @@ function DBGetIdolList() {
 
 function DBGetIdolInfo(IdolID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `1-Idols` AS a, `2-Units` AS b WHERE a.`IdolID` = ? AND a.`UnitID` = b.`UnitID` LIMIT 1", [IdolID], (err, result) => {
+        conn.execute("SELECT a.*, b.UnitName, b.UnitHiragana FROM `SCDB_Idols` AS a, `SCDB_Units` AS b WHERE a.`IdolID` = ? AND a.`UnitID` = b.`UnitID` LIMIT 1", [IdolID], (err, result) => {
             if (err) throw err;
             res(result[0]);
         });
@@ -72,7 +72,7 @@ function DBGetIdolInfo(IdolID) {
 
 function DBGetCardList(IdolID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT * FROM `3-IdolCards` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardID`", [IdolID], (err, result) => {
+        conn.execute("SELECT * FROM `SCDB_CardList` WHERE `IdolID` = ? ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `CardID`", [IdolID], (err, result) => {
             if (err) throw err;
             res(result);
         });
@@ -81,7 +81,7 @@ function DBGetCardList(IdolID) {
 
 function DBGetAllCardList() {
     return new Promise((resolve, reject) => {
-        conn.execute("SELECT a.CardName, a.CardUUID, a.BigPic2, a.SmallPic, a.CardType FROM `3-IdolCards` a ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `IdolID`", [], (err, result) => {
+        conn.execute("SELECT a.CardName, a.CardUUID, a.BigPic2, a.SmallPic, a.CardType FROM `SCDB_CardList` a ORDER BY FIELD (`CardType`, \"P_SSR\", \"P_SR\", \"P_R\", \"S_SSR\", \"S_SR\", \"S_R\", \"S_N\"), `IdolID`", [], (err, result) => {
             if (err) throw err;
             resolve(result);
         });
