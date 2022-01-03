@@ -275,7 +275,7 @@ function DBGetSCardInfo(CardUUID) {
 
 function DBGetSupportSkills(CardUUID) {
     return new Promise((res, _) => {
-        conn.execute("SELECT a.* FROM `SCDB-CardSupportSkill` AS a, `SCDB_CardList` AS b WHERE b.CardUUID = ? AND a.CardIndex = b.CardIndex",
+        conn.execute("SELECT a.* FROM `SCDB_CardSupportSkill` AS a, `SCDB_CardList` AS b WHERE b.CardUUID = ? AND a.CardIndex = b.CardIndex",
             [CardUUID],
             (err, result) => {
                 let tmp0 = new Map(),
