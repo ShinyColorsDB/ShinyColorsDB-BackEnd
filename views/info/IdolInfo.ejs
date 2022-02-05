@@ -22,7 +22,7 @@
     生日: <%= IdolInfo.Birthday %>體重: <%= IdolInfo.Weight %>
     團體: <%= IdolInfo.UnitName %>三圍: <%= IdolInfo.ThreeSize %>">
     <meta property="og:image"
-        content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
+        content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>.jpg">
     <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     生日: <%= IdolInfo.Birthday %>體重: <%= IdolInfo.Weight %>
     團體: <%= IdolInfo.UnitName %>三圍: <%= IdolInfo.ThreeSize %>">
     <meta property="twitter:image"
-        content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>">
+        content="https://static.shinycolors.moe/pictures/bigPic/<%= CardList.PSSR.slice(-1)[0].BigPic1 %>.jpg">
 
     <title>
         <%= IdolInfo.IdolName %>-ShinyColorsDB
@@ -149,7 +149,7 @@
                         </tr>
                         <tr>
                             <th>聲優</th>
-                            <td><%=IdolInfo.CV%></td>
+                            <td><% if(IdolInfo.PreCV) { %><%=IdolInfo.PreCV%> → <% } %><%=IdolInfo.CV%></td>
                         </tr>
                     </tbody>
                 </table>
@@ -178,7 +178,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/PCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
@@ -195,7 +195,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/PCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
@@ -211,7 +211,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/PCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
@@ -229,7 +229,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
@@ -246,7 +246,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
@@ -263,7 +263,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>
@@ -280,7 +280,7 @@
                             <div class="col-4 pt-1 pb-1">
                                 <div class="card">
                                     <a href="/info/SCardInfo?UUID=<%=e.CardUUID%>">
-                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>" alt="" class="card-img-top">
+                                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%=e.BigPic1%>.jpg" alt="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-text">
                                                 <%=e.CardName.replace(/(【.*】)(.*)/, "$1")%>

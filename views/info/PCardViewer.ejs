@@ -5,211 +5,428 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://shinycolors.moe/static/bootstrap/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://shinycolors.moe/static/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/static/css/default.css">
-    <link rel="stylesheet" href="/static/css/PCardViewer.css">
+    <link rel="stylesheet" href="/static/css/SCardViewer.css">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
+    <meta property="og:url" content="https://shinycolors.moe/info/PCardInfo?UUID=<%= CardInfo.CardUUID %>">
     <meta property="og:title" content="<%= CardInfo.CardName %>">
-    <meta property="og:description" content="名稱: <%= CardInfo.CardName %> 實裝日期: <%= CardInfo.ReleaseDate %> 稀有度: <%= CardInfo.CardType %>">
-    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
+    <meta property="og:description" content="
+            名稱: <%= CardInfo.CardName %> 
+            實裝日期: <%= CardInfo.ReleaseDate %> 
+            稀有度: <%= CardInfo.CardType %>">
+    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg">
     <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
+    <meta property="twitter:url" content="https://shinycolors.moe/info/PCardInfo?UUID=<%= CardInfo.CardUUID %>">
     <meta property="twitter:title" content="<%= CardInfo.CardName %>">
-    <meta property="twitter:description" content="名稱: <%= CardInfo.CardName %> 實裝日期: <%= CardInfo.ReleaseDate %> 稀有度: <%= CardInfo.CardType %>">
-    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
+    <meta property="twitter:description" content="
+            名稱: <%= CardInfo.CardName %> 
+            實裝日期: <%= CardInfo.ReleaseDate %> 
+            稀有度: <%= CardInfo.CardType %>">
+    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg">
 
-    <title><%= CardInfo.CardName %>-ShinyColorsDB</title>
+    <script src="/static/javascript/SCardViewer.js"></script>
 
-    <script src="/static/javascript/spine.js"></script>
-    <script src="/static/javascript/PCardViewer.js"></script>
-    <!--link rel="stylesheet" href="./PCardViewer.css"-->
+    <title>
+        <%= CardInfo.CardName %>-ShinyColorsDB
+    </title>
+
 </head>
 
 <body class="h-100" onload="Init();">
     <div class="container-fluid d-flex p-0 h-100">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-md-2 col-sm-12" id="divSidebar">
-            <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg" data-toggle="collapse" data-target="#divMainList">首頁</a>
-            <div class="list-group well overflow-auto custom-scroll collapse" id="divMainList">
-                <a href="/" class="list-group-item">ShinyColorsDB</a>
-                <a href="#" class="list-group-item">最新情報</a>
-                <a href="#" class="list-group-item">無限期招募前端大師= =</a>
-            </div>
-
-            <a href="#" class="list-group-item p-2 bg-light text-dark custom-rounded" data-toggle="collapse" data-target="#divIdolUnitList">角色列表</a>
-            <div class="list-group well overflow-auto custom-scroll" id="divIdolUnitList">
-                <% for(let i = 0; i < IdolList.length; i++) { %>
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target=<%= `#unit${i + 1}` %>>
-                        <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png" width="20" height="20" alt="">
-                        <%= IdolList[i].UnitName %>
-                    </a>
-                    <div class="
-                    <% if(i + 1 == IdolInfo.UnitID) { %> 
-                        list-group
-                    <% } else { %> 
-                        list-group collapse
-                    <% } %>"
-                        id=<%= `unit${i + 1}` %> >
-                        <% for(let k = 0; k < IdolList[i].Idols.length; k++) { %>
-                            <a href=<%= `/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %> 
-                                class=" <% if(IdolList[i].Idols[k].IdolID == IdolInfo.IdolID) { %> 
-                                            list-group-item active pl-4
-                                        <% } else { %> 
-                                            list-group-item pl-4
-                                        <% } %>"> 
-                                <%= IdolList[i].Idols[k].IdolName %>
-                            </a>
-                        <% } %>
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-2 accordion accordion-flush"
+            id="divSidebar">
+            <div class="accordion-item rounded-top">
+                <h2 class="accordion-header" id="descHomePage">
+                    <button class="accordion-button collapsed rounded-top" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#divMainList" aria-expanded="false" aria-controls="divMainList">
+                        首頁
+                    </button>
+                </h2>
+                <div id="divMainList" class="accordion-collapse collapse" aria-labelledby="descHomePage" data-bs-parent="#divSidebar">
+                    <div class="accordion-body p-0 list-group">
+                        <button class="w-100 rounded list-group-item text-start">ShinyColorsDB</button>
+                        <button class="w-100 rounded list-group-item text-start">最新情報</button>
+                        <button class="w-100 rounded list-group-item text-start">無限期招募前端大師= =</button>
                     </div>
-                <% } %>
+                </div>
+            </div>
+            
+            <div class="accordion-item overflow-auto">
+                <h2 class="accordion-header" id="descUnit">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#divIdolUnitList"
+                        aria-expanded="true" aria-controls="divIdolUnitList">
+                        角色列表
+                    </button>
+                </h2>
                 
+                <div class="accordion-collapse collapse show" id="divIdolUnitList" aria-labelledby="descUnit" data-bs-parent="#divSidebar">
+                    <% for(let i=0; i < IdolList.length; i++) { %>
+                        <button href="#" class="list-group-item w-100 text-start" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>
+                            style="background-color: <%= IdolList[i].UnitColor %>">
+                            <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png"
+                                width="20" height="20" alt="">
+                            <%= IdolList[i].UnitName %>
+                        </button>
+                        <div class="list-group <% if(i + 1 != IdolInfo.UnitID) { %> collapse <% } %>" id=<%=`unit${i + 1}` %>>
+                            <% for(let k=0; k < IdolList[i].Idols.length; k++) { %>
+                            <a href=<%=`/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %>
+                                class="
+                                <% if(IdolList[i].Idols[k].IdolID==IdolInfo.IdolID) { %>
+                                    active
+                                <% } %> ps-4 list-group-item-action list-group-item">
+                                <img src="https://static.shinycolors.moe/pictures/smlIcon/<% if(IdolList[i].Idols[k].IdolID < 10) { %>0<%=IdolList[i].Idols[k].IdolID%><% } else { %><%=IdolList[i].Idols[k].IdolID%><% } %>.png"
+                                    width="40" height="40" alt="" class="d-inline-block">
+                                <h6 class="d-inline-block">
+                                    <%= IdolList[i].Idols[k].IdolName %>
+                                </h6>
+                            </a>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
             </div>
-            <a href="https://spine.shinycolors.moe" class="list-group-item p-2 bg-light text-dark custom-rounded rounded-lg">服裝Live2d~~</a>
+            <a href="https://spine.shinycolors.moe"
+                class="p-2 bg-light text-dark rounded-bottom">服裝Live2d~~</a>
         </div>
-        <div class="col-md-7 p-3 overflow-auto">
-            <h2><%= CardInfo.CardName %></h2>
-            <div class="w-100">
-                <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>" alt="" class="img-fluid">
-            </div>
-            <div id="skillPanel" class="w-100 container d-flex">
-                <div class="row w-100 align-items-center">
-                    <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-4">
-                        <div class="hex d-flex flex-column justify-content-center bg-secondary">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[0].SkillName %>
-                            </div>
-                        </div>
+        <div class="col-10 pt-3 ps-2 overflow-auto">
+            <h2>
+                <%= CardInfo.CardName %>
+            </h2>
+            <div class="row col-12">
+                <div class="col-5 p-0 d-inline carousel carousel-dark" data-bs-ride="carousel" data-bs-interval="5000"> <!---->                    
+                    <div class="carousel-inner">
+                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg" alt=""
+                                class="img-fluid ps-3 carousel-item active">
+                        
+                        <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic2 %>.jpg" alt=""
+                                class="img-fluid ps-3 carousel-item">
+                        
                     </div>
-                    <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-n3">
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if(SkillPanel[1].IsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[1].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if(SkillPanel[2].IsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[2].SkillName %>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-7 p-0 d-inline">
+                    <div class="ps-3">
+                        稀有度: <%= CardInfo.CardType %> <br>
+                        實裝日期: <%= CardInfo.ReleaseDate %> <br>
+                        取得方式: <%= CardInfo.GetMethod %>
                     </div>
-                    <div class="col-12 w-100 d-flex justify-content-center mb-n3 mt-n3">
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if(SkillPanel[3].IsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[3].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if(SkillPanel[4].IsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[4].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if(SkillPanel[5].IsGold) { %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[5].SkillName %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 w-100 d-flex justify-content-center mb-2 mt-n3">
-                        <% if (SkillPanel.length == 10) { %>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if (SkillPanel[6].IsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[6].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if (SkillPanel[7].IsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[7].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if (SkillPanel[8].IsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[8].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if (SkillPanel[9].IsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[9].SkillName %>
-                            </div>
-                        </div>
-                        <% } else if (SkillPanel.length == 8){ %>
-                        <div class="hex d-flex ml-1 mr-1 bg-secondary"></div>
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if (SkillPanel[6].IsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[6].SkillName %>
-                            </div>
-                        </div>  
-                        <div class="hex d-flex flex-column justify-content-center ml-1 mr-1 <% if (SkillPanel[7].IsGold){ %>bg-warning<% } else { %>bg-secondary<% } %>">
-                            <div class="skillTitle align-self-center text-center">
-                                <%= SkillPanel[7].SkillName %>
-                            </div>
-                        </div>
-                        <div class="hex d-flex ml-1 mr-1 bg-secondary"></div>
-                        <% } else { %>
-                        <div class="hex d-flex ml-1 mr-1 bg-secondary"></div>
-                        <div class="hex d-flex ml-1 mr-1 bg-secondary"></div>
-                        <div class="hex d-flex ml-1 mr-1 bg-secondary"></div>
-                        <div class="hex d-flex ml-1 mr-1 bg-secondary"></div>
+                    <div class="ps-3">
+                        <% if(CardIdolEvents.length) { %>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">事件名稱</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <% CardIdolEvents.forEach(e => { %>
+                                <tr>
+                                    <td><%= e.EventTitle %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                        <% } %>
+                        <% if(TrueEnd) { %>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">TrueEnd</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td><%=TrueEnd.EventTitle%></td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <% } %>
                     </div>
                 </div>
             </div>
-            <!--div class="w-100 container" id="omoide">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>技能名稱</th>
-                            <th>技能效果</th>
-                            <th>LinkAppeal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>見つける</th>
-                            <td>思い出アピール[Lv1]</td>
-                            <td rowspan="2">全観客にDance1.2倍アピール</td>
-                        </tr>
-                        <tr>
-                            <th>見つける+</th>
-                            <td>思い出アピール[Lv2]</td>
-                        </tr>
-                        <tr>
-                            <th>見つける++</th>
-                            <td>思い出アピール[Lv3]/Dance25%UP[ダメージを受けるまで]</td>
-                            <td rowspan="3">全観客にDance2.5倍アピール</td>
-                        </tr>
-                        <tr>
-                            <th>見つける+++</th>
-                            <td>思い出アピール[Lv4]/Dance50%UP[ダメージを受けるまで]</td>
-                        </tr>
-                        <tr>
-                            <th>[見つける]見つける</th>
-                            <td>思い出アピール[Lv5]/Dance100%UP[ダメージを受けるまで]</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div-->
-        </div>
-        <div class="col-md-3 pr-0 pl-0 vh-100 container-fluid d-flex flex-column">
-            <div class="w-100 flex-shrink-0 p-3 bg-secondary">
-                <span>Type:</span>
-                <select id="typeList" class="form-select w-35 pr-0" data-idolNick="<%= IdolInfo.NickName %>" data-cardUUID="<%= CardInfo.DressUUID %>" data-Exists="<%= CardInfo.DressExist %>">
-                    <option value="sml_cloth0">Q版-通常服</option>
-                    <option value="sml_cloth1">Q版-演出服</option>
-                    <option value="big_cloth0" selected>一般-通常服</option>
-                    <option value="big_cloth1">一般-演出服</option>
-                </select>
-                <span>Animation:</span>
-                <select id="animationList" class="form-select w-30"></select>
+            <div class="col-12 row pt-4">
+                <div class="grid col-5">
+                    <ul id="hexGrid">
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                    <div class="hexagon"></div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                    <div class='hexagon'></div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink d-flex align-items-center justify-content-center bg-secondary"
+                                    href="#" tabindex="0" role="button" data-bs-container="body"
+                                    data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                    data-bs-content='<%= SkillPanel[0].SkillDesc %>'
+                                    title="<%= SkillPanel[0].SkillTitle %>">
+                                    <div class="w-100 text-center">
+                                        <%= SkillPanel[0].SkillTitle %>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[2].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                    href="#" tabindex="0" role="button" data-bs-container="body"
+                                    data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                    data-bs-content='<%= SkillPanel[2].SkillDesc %>'
+                                    title="<%= SkillPanel[2].SkillTitle %>">
+                                    <div class="w-100 text-center">
+                                        <%= SkillPanel[2].SkillTitle %>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[1].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                    href="#" tabindex="0" role="button" data-bs-container="body"
+                                    data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                    data-bs-content='<%= SkillPanel[1].SkillDesc %>'
+                                    title="<%= SkillPanel[1].SkillTitle %>">
+                                    <!--img src="https://static.shinycolors.moe/pictures/skillIcon/20003.png" alt=""-->
+                                    <div class="w-100 text-center">
+                                        <%= SkillPanel[1].SkillTitle %>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant no <% } else if(SkillPanel[5].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                    href="#" 
+                                    <% if(SkillPanel.length> 3) { %>
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[5].SkillDesc %>' title="<%= SkillPanel[5].SkillTitle%>"
+                                    <% } %>>
+                                    <div class="w-100 text-center">
+                                        <% if(SkillPanel.length> 3 && SkillPanel[5]) { %> 
+                                        <%= SkillPanel[5].SkillTitle %>
+                                        <% } %>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant no <% } else if(SkillPanel[4].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                    href="#" 
+                                    <% if(SkillPanel.length> 3) { %>
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[4].SkillDesc %>' title="<%= SkillPanel[4].SkillTitle%>"
+                                    <% } %>>
+                                    <div class="w-100 text-center">
+                                        <% if(SkillPanel.length> 3 && SkillPanel[4]) { %> 
+                                        <%=SkillPanel[4].SkillTitle %>
+                                        <% } %>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel.length <= 3) { %> bg-transprant no <% } else if(SkillPanel[3].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                    href="#" 
+                                    <% if(SkillPanel.length> 3) { %>
+                                        tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[3].SkillDesc %>' title="<%= SkillPanel[3].SkillTitle%>"
+                                    <% } %>>
+                                    <div class="w-100 text-center">
+                                        <% if(SkillPanel.length> 3 && SkillPanel[3]) { %> 
+                                        <%=SkillPanel[3].SkillTitle %>
+                                        <% } %>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <a class="hexLink no" href="#">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <% if(SkillPanel.length==10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[9].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                        href="#" tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[9].SkillDesc %>'
+                                        title="<%= SkillPanel[9].SkillTitle %>">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[9].SkillTitle %>
+                                        </div>
+                                    </a>
+                                <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center" href="#">
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <% if(SkillPanel.length==10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[8].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                        href="#" tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[8].SkillDesc %>'
+                                        title="<%= SkillPanel[8].SkillTitle %>">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[8].SkillTitle %>
+                                        </div>
+                                    </a>
+                                <% } else if(SkillPanel.length==8){ %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                        href="#" tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[7].SkillDesc %>'
+                                        title="<%= SkillPanel[7].SkillTitle %>">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[7].SkillTitle %>
+                                        </div>
+                                    </a>
+                                <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center no"
+                                        href="#">
+                                            <div class="w-100 text-center">
+                                            </div>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <% if(SkillPanel.length==10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                        href="#" tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[7].SkillDesc %>'
+                                        title="<%= SkillPanel[7].SkillTitle %>">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[7].SkillTitle %>
+                                        </div>
+                                    </a>
+                                <% } else if(SkillPanel.length==8){ %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                        href="#" tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[6].SkillDesc %>'
+                                        title="<%= SkillPanel[6].SkillTitle %>">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[6].SkillTitle %>
+                                        </div>
+                                    </a>
+                                <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center no"
+                                        href="#">
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </li>
+                        <li class="hex">
+                            <div class="hexIn">
+                                <% if(SkillPanel.length==10) { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
+                                        href="#" tabindex="0" role="button" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                        data-bs-content='<%= SkillPanel[6].SkillDesc %>'
+                                        title="<%= SkillPanel[6].SkillTitle %>">
+                                        <div class="w-100 text-center">
+                                            <%= SkillPanel[6].SkillTitle %>
+                                        </div>
+                                    </a>
+                                <% } else { %>
+                                    <a class="hexLink d-flex align-items-center justify-content-center no" href="#">
+                                        <div class="w-100 text-center">
+                                        </div>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-7 container">
+                    <h4>回憶綻放</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">技能名稱</th>
+                                <th scope="col">技能說明</th>
+                                <th scope="col">連結技能</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% CardMemoryAppeal.forEach(e => { %>
+                            <tr>
+                                <td><%= e.MemoryTitle %></td>
+                                <td><%= e.MemoryDesc %></td>
+                                <td><%= e.LinkSkillDesc %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <canvas id="canvas" class="flex-column p-0 w-100 h-100"></canvas>
         </div>
     </div>
 </body>
+
+</html>

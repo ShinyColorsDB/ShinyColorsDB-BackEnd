@@ -17,23 +17,23 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
+    <meta property="og:url" content="https://shinycolors.moe/info/SCardInfo?UUID=<%= CardInfo.CardUUID %>">
     <meta property="og:title" content="<%= CardInfo.CardName %>">
     <meta property="og:description" content="
             名稱: <%= CardInfo.CardName %> 
             實裝日期: <%= CardInfo.ReleaseDate %> 
             稀有度: <%= CardInfo.CardType %>">
-    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
+    <meta property="og:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg">
     <meta name="theme-color" content="<%= IdolInfo.Color1 %>">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://shinycolors.moe/info/CardInfo?UUID=<%= CardInfo.CardUUID %>">
+    <meta property="twitter:url" content="https://shinycolors.moe/info/SCardInfo?UUID=<%= CardInfo.CardUUID %>">
     <meta property="twitter:title" content="<%= CardInfo.CardName %>">
     <meta property="twitter:description" content="
             名稱: <%= CardInfo.CardName %> 
             實裝日期: <%= CardInfo.ReleaseDate %> 
             稀有度: <%= CardInfo.CardType %>">
-    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>">
+    <meta property="twitter:image" content="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg">
 
     <script src="/static/javascript/SCardViewer.js"></script>
 
@@ -106,14 +106,14 @@
             </h2>
             <div class="col-12 row">
                 <div class="col-5 p-0 d-inline">
-                    <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>" alt=""
+                    <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg" alt=""
                         class="img-fluid ps-3">
                 </div>
                 <div class="col-7 p-0 d-inline">
                     <div class="ps-3">
                         稀有度: <%= CardInfo.CardType %> <br>
-                            實裝日期: <%= CardInfo.ReleaseDate %> <br>
-                                取得方式: <%= CardInfo.GetMethod %>
+                        實裝日期: <%= CardInfo.ReleaseDate %> <br>
+                        取得方式: <%= CardInfo.GetMethod %>
                     </div>
                     <div class="ps-3">
                         <table class="table table-hover">
@@ -207,10 +207,10 @@
                                 <a class="hexLink d-flex align-items-center justify-content-center bg-secondary"
                                     href="#" tabindex="0" role="button" data-bs-container="body"
                                     data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                    data-bs-content='<%= SkillPanel[0].PanelDesc %>'
-                                    title="<%= SkillPanel[0].PanelTitle %>">
+                                    data-bs-content='<%= SkillPanel[0].SkillDesc %>'
+                                    title="<%= SkillPanel[0].SkillTitle %>">
                                     <div class="w-100 text-center">
-                                        <%= SkillPanel[0].PanelTitle %>
+                                        <%= SkillPanel[0].SkillTitle %>
                                     </div>
                                 </a>
                             </div>
@@ -238,10 +238,10 @@
                                 <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[2].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                     href="#" tabindex="0" role="button" data-bs-container="body"
                                     data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                    data-bs-content='<%= SkillPanel[2].PanelDesc %>'
-                                    title="<%= SkillPanel[2].PanelTitle %>">
+                                    data-bs-content='<%= SkillPanel[2].SkillDesc %>'
+                                    title="<%= SkillPanel[2].SkillTitle %>">
                                     <div class="w-100 text-center">
-                                        <%= SkillPanel[2].PanelTitle %>
+                                        <%= SkillPanel[2].SkillTitle %>
                                     </div>
                                 </a>
                             </div>
@@ -251,11 +251,11 @@
                                 <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[1].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                     href="#" tabindex="0" role="button" data-bs-container="body"
                                     data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                    data-bs-content='<%= SkillPanel[1].PanelDesc %>'
-                                    title="<%= SkillPanel[1].PanelTitle %>">
+                                    data-bs-content='<%= SkillPanel[1].SkillDesc %>'
+                                    title="<%= SkillPanel[1].SkillTitle %>">
                                     <!--img src="https://static.shinycolors.moe/pictures/skillIcon/20003.png" alt=""-->
                                     <div class="w-100 text-center">
-                                        <%= SkillPanel[1].PanelTitle %>
+                                        <%= SkillPanel[1].SkillTitle %>
                                     </div>
                                 </a>
                             </div>
@@ -279,11 +279,11 @@
                                     <% if(SkillPanel.length> 3) { %>
                                         tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[5].PanelDesc %>' title="<%= SkillPanel[5].PanelTitle%>"
+                                        data-bs-content='<%= SkillPanel[5].SkillDesc %>' title="<%= SkillPanel[5].SkillTitle%>"
                                     <% } %>>
                                     <div class="w-100 text-center">
                                         <% if(SkillPanel.length> 3 && SkillPanel[5]) { %> 
-                                        <%= SkillPanel[5].PanelTitle %>
+                                        <%= SkillPanel[5].SkillTitle %>
                                         <% } %>
                                     </div>
                                 </a>
@@ -296,11 +296,11 @@
                                     <% if(SkillPanel.length> 3) { %>
                                         tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[4].PanelDesc %>' title="<%= SkillPanel[4].PanelTitle%>"
+                                        data-bs-content='<%= SkillPanel[4].SkillDesc %>' title="<%= SkillPanel[4].SkillTitle%>"
                                     <% } %>>
                                     <div class="w-100 text-center">
                                         <% if(SkillPanel.length> 3 && SkillPanel[4]) { %> 
-                                        <%=SkillPanel[4].PanelTitle %>
+                                        <%=SkillPanel[4].SkillTitle %>
                                         <% } %>
                                     </div>
                                 </a>
@@ -313,11 +313,11 @@
                                     <% if(SkillPanel.length> 3) { %>
                                         tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[3].PanelDesc %>' title="<%= SkillPanel[3].PanelTitle%>"
+                                        data-bs-content='<%= SkillPanel[3].SkillDesc %>' title="<%= SkillPanel[3].SkillTitle%>"
                                     <% } %>>
                                     <div class="w-100 text-center">
                                         <% if(SkillPanel.length> 3 && SkillPanel[3]) { %> 
-                                        <%=SkillPanel[3].PanelTitle %>
+                                        <%=SkillPanel[3].SkillTitle %>
                                         <% } %>
                                     </div>
                                 </a>
@@ -335,10 +335,10 @@
                                     <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[9].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                         href="#" tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[9].PanelDesc %>'
-                                        title="<%= SkillPanel[9].PanelTitle %>">
+                                        data-bs-content='<%= SkillPanel[9].SkillDesc %>'
+                                        title="<%= SkillPanel[9].SkillTitle %>">
                                         <div class="w-100 text-center">
-                                            <%= SkillPanel[9].PanelTitle %>
+                                            <%= SkillPanel[9].SkillTitle %>
                                         </div>
                                     </a>
                                 <% } else { %>
@@ -355,20 +355,20 @@
                                     <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[8].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                         href="#" tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[8].PanelDesc %>'
-                                        title="<%= SkillPanel[8].PanelTitle %>">
+                                        data-bs-content='<%= SkillPanel[8].SkillDesc %>'
+                                        title="<%= SkillPanel[8].SkillTitle %>">
                                         <div class="w-100 text-center">
-                                            <%= SkillPanel[8].PanelTitle %>
+                                            <%= SkillPanel[8].SkillTitle %>
                                         </div>
                                     </a>
                                 <% } else if(SkillPanel.length==8){ %>
                                     <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                         href="#" tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[7].PanelDesc %>'
-                                        title="<%= SkillPanel[7].PanelTitle %>">
+                                        data-bs-content='<%= SkillPanel[7].SkillDesc %>'
+                                        title="<%= SkillPanel[7].SkillTitle %>">
                                         <div class="w-100 text-center">
-                                            <%= SkillPanel[7].PanelTitle %>
+                                            <%= SkillPanel[7].SkillTitle %>
                                         </div>
                                     </a>
                                 <% } else { %>
@@ -386,20 +386,20 @@
                                     <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[7].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                         href="#" tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[7].PanelDesc %>'
-                                        title="<%= SkillPanel[7].PanelTitle %>">
+                                        data-bs-content='<%= SkillPanel[7].SkillDesc %>'
+                                        title="<%= SkillPanel[7].SkillTitle %>">
                                         <div class="w-100 text-center">
-                                            <%= SkillPanel[7].PanelTitle %>
+                                            <%= SkillPanel[7].SkillTitle %>
                                         </div>
                                     </a>
                                 <% } else if(SkillPanel.length==8){ %>
                                     <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                         href="#" tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[6].PanelDesc %>'
-                                        title="<%= SkillPanel[6].PanelTitle %>">
+                                        data-bs-content='<%= SkillPanel[6].SkillDesc %>'
+                                        title="<%= SkillPanel[6].SkillTitle %>">
                                         <div class="w-100 text-center">
-                                            <%= SkillPanel[6].PanelTitle %>
+                                            <%= SkillPanel[6].SkillTitle %>
                                         </div>
                                     </a>
                                 <% } else { %>
@@ -417,10 +417,10 @@
                                     <a class="hexLink d-flex align-items-center justify-content-center <% if(SkillPanel[6].PanelIsGold) { %> bg-warning <% } else { %> bg-secondary <% } %>"
                                         href="#" tabindex="0" role="button" data-bs-container="body"
                                         data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
-                                        data-bs-content='<%= SkillPanel[6].PanelDesc %>'
-                                        title="<%= SkillPanel[6].PanelTitle %>">
+                                        data-bs-content='<%= SkillPanel[6].SkillDesc %>'
+                                        title="<%= SkillPanel[6].SkillTitle %>">
                                         <div class="w-100 text-center">
-                                            <%= SkillPanel[6].PanelTitle %>
+                                            <%= SkillPanel[6].SkillTitle %>
                                         </div>
                                     </a>
                                 <% } else { %>

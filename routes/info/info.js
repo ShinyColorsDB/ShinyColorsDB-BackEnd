@@ -28,18 +28,26 @@ info.get("/PCardInfo", async (req, res, next) => {
     if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
 
     const [ListByGroup, List] = await DBGetIdolList();
-    const [Panel, IdolID] = await DBGetPCardPanel(req.query.UUID);
+    const [Panel, IdolID] = await DBGetCardPanel(req.query.UUID);
+    Panel.forEach(e => {
+        e.SkillDesc = e.SkillDesc.replace(/\n/g, "<br>");
+    });
     const IdolInfo = await DBGetIdolInfo(IdolID);
-    const CardInfo = await DBGetPCardInfo(req.query.UUID);
-    console.log(CardInfo);
+    const CardInfo = await DBGetCardInfo(req.query.UUID);
+    CardInfo.GetMethod = convertGetMethod(CardInfo.GetMethod);
+    //console.log(CardInfo);
     //console.log(Panel);
-
+    const CardMemoryAppeal = await DBGetCardMemoryAppeal(req.query.UUID);
+    const [CardIdolEvents, TrueEnd] = await DBGetCardIdolEvents(req.query.UUID);
 
     res.render('info/PCardViewer', {
         IdolList: ListByGroup,
         SkillPanel: Panel,
         IdolInfo: IdolInfo,
-        CardInfo: CardInfo
+        CardInfo: CardInfo,
+        CardMemoryAppeal: CardMemoryAppeal,
+        CardIdolEvents: CardIdolEvents,
+        TrueEnd: TrueEnd
     });
 
 });
@@ -48,13 +56,13 @@ info.get("/SCardInfo", async (req, res) => {
     if (!req.query.UUID) res.redirect("./IdolInfo?IdolID=1");
 
     const [ListByGroup, List] = await DBGetIdolList();
-    const [Panel, IdolID] = await DBGetSCardPanel(req.query.UUID);
+    const [Panel, IdolID] = await DBGetCardPanel(req.query.UUID);
     if (!IdolID) {
         res.sendStatus(404);
         return;
     }
     Panel.forEach(e => {
-        e.PanelDesc = e.PanelDesc.replace(/\n/g, "<br>");
+        e.SkillDesc = e.SkillDesc.replace(/\n/g, "<br>");
     });
     const IdolInfo = await DBGetIdolInfo(IdolID);
     switch (IdolInfo.Hirameki) {
@@ -71,22 +79,9 @@ info.get("/SCardInfo", async (req, res) => {
             IdolInfo.HiraName = "mental"
             break;
     }
-    const CardInfo = await DBGetSCardInfo(req.query.UUID);
-    switch (CardInfo.GetMethod) {
-        case "Events":
-            CardInfo.GetMethod = "活動報酬";
-            break;
-        case "LimitedGasha":
-            CardInfo.GetMethod = "限定卡池";
-            break;
-        case "GeneralGasha":
-            CardInfo.GetMethod = "常駐卡池";
-            break;
-        case "FesReward":
-            CardInfo.GetMethod = "天梯兌換";
-        default:
-            break;
-    }
+    const CardInfo = await DBGetCardInfo(req.query.UUID);
+    CardInfo.GetMethod = convertGetMethod(CardInfo.GetMethod);
+    
     const [SupportSkills0, SupportSkills1, SupportSkills2, SupportSkills3, SupportSkills4] = await DBGetSupportSkills(req.query.UUID);
     const SupportEvents = await DBGetSupportEvents(req.query.UUID);
     const IdeaMark = await DBGetIdeaMark(req.query.UUID);
@@ -145,6 +140,25 @@ info.get("/SCardInfo", async (req, res) => {
 });
 
 module.exports = info;
+
+function convertGetMethod(method) {
+    switch (method) {
+        case "Events":
+            return "活動報酬";
+        case "LimitedGasha":
+            return "限定卡池";
+        case "GeneralGasha":
+            return "常駐卡池";
+        case "FesReward":
+            return "天梯兌換";
+        case "LiveReward":
+            return "演唱會報酬";
+        case "IdolRoad":
+            return "偶像之路";
+        default:
+            return "";
+    }
+}
 
 function DBGetIdolList() {
     return new Promise((res, rej) => {
@@ -227,21 +241,13 @@ function GenerateImgObj(str) {
     }
 }
 
-function DBGetPCardPanel(CardUUID) {
+function DBGetCardPanel(CardUUID) {
     return new Promise((res, rej) => {
-        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `SCDB_CardList` AS a, `SCDB_CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.SkillSlot",
+        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `SCDB_CardList` AS a, `SCDB_CardPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.PanelSlot",
             [CardUUID],
             (err, result) => {
-                res([result, result[0].IdolID]);
-            });
-    });
-}
+                if(err) throw err;
 
-function DBGetSCardPanel(CardUUID) {
-    return new Promise((res, rej) => {
-        conn.execute("SELECT a.CardName, a.IdolID, b.* FROM `SCDB_CardList` AS a, `SCDB_CardSkillPanel` AS b WHERE a.CardUUID = ? AND a.CardIndex = b.CardIndex ORDER BY b.PanelSlot",
-            [CardUUID],
-            (err, result) => {
                 if (!result[0]?.IdolID) {
                     res([result, 0]);
                 }
@@ -252,21 +258,13 @@ function DBGetSCardPanel(CardUUID) {
     });
 }
 
-function DBGetPCardInfo(CardUUID) {
-    return new Promise((res, rej) => {
-        conn.execute("SELECT a.*, b.DressUUID, b.Exist AS `DressExist` FROM `SCDB_CardList` AS a, `SCDB_IdolDress` AS b WHERE a.CardUUID = ? AND a.DressIndex = b.DressIndex;",
-            [CardUUID],
-            (err, result) => {
-                res(result[0]);
-            });
-    });
-}
-
-function DBGetSCardInfo(CardUUID) {
+function DBGetCardInfo(CardUUID) {
     return new Promise((res, rej) => {
         conn.execute("SELECT a.* FROM `SCDB_CardList` AS a WHERE a.CardUUID = ? ;",
             [CardUUID],
             (err, result) => {
+                if(err) throw err;
+
                 result[0].ReleaseDate = date.format(new Date(result[0].ReleaseDate), 'MM/dd/yyyy');
                 res(result[0]);
             });
@@ -278,6 +276,8 @@ function DBGetSupportSkills(CardUUID) {
         conn.execute("SELECT a.* FROM `SCDB_CardSupportSkill` AS a, `SCDB_CardList` AS b WHERE b.CardUUID = ? AND a.CardIndex = b.CardIndex",
             [CardUUID],
             (err, result) => {
+                if(err) throw err;
+
                 let tmp0 = new Map(),
                     tmp1 = new Map(),
                     tmp2 = new Map(),
@@ -322,6 +322,8 @@ function DBGetSupportEvents(CardUUID) {
         conn.execute("SELECT a.* FROM `SCDB_CardSupportEvent` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ? ORDER BY `EventID`",
             [CardUUID],
             (err, result) => {
+                if(err) throw err;
+
                 res(result);
             });
     });
@@ -332,6 +334,8 @@ function DBGetProficiency(CardUUID) {
         conn.execute("SELECT a.* FROM `SCDB_CardProficiency` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
             [CardUUID],
             (err, result) => {
+                if(err) throw err;
+
                 res(result);
             });
     });
@@ -342,7 +346,42 @@ function DBGetIdeaMark(CardUUID) {
         conn.execute("SELECT a.* FROM `SCDB_CardIdeaMark` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ?",
             [CardUUID],
             (err, result) => {
+                if(err) throw err;
+
                 res(result[0]);
+            });
+    });
+}
+
+function DBGetCardMemoryAppeal(CardUUID) {
+    return new Promise((res, _) => {
+        conn.execute("SELECT a.* FROM `SCDB_CardMemoryAppeal` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ? AND a.MemoryTitle != '思い出アピール未習得'",
+            [CardUUID],
+            (err, result) => {
+                if(err) throw err;
+
+                res(result);
+            })
+    });
+}
+
+function DBGetCardIdolEvents(CardUUID) {
+    return new Promise((res, _) => {
+        conn.execute("SELECT a.* FROM `SCDB_CardIdolEvent` a, `SCDB_CardList` b WHERE a.CardIndex = b.CardIndex AND b.CardUUID = ? ORDER BY `EventID`",
+            [CardUUID],
+            (err, result) => {
+                if (err) throw err;
+
+                let iEvent = new Array(), tEvent = undefined;
+                result.forEach(e => {
+                    if (e.EventCategory == "アイドルイベント") {
+                        iEvent.push(e);
+                    }
+                    else {
+                        tEvent = e;
+                    }
+                });
+                res([iEvent, tEvent]);
             });
     });
 }
