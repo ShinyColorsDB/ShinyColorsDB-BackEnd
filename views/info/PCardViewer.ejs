@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -44,68 +45,13 @@
 </head>
 
 <body class="h-100" onload="Init();">
-    <div class="container-fluid d-flex p-0 h-100">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-inline-block h-100 col-2 accordion accordion-flush"
-            id="divSidebar">
-            <div class="accordion-item rounded-top">
-                <h2 class="accordion-header" id="descHomePage">
-                    <button class="accordion-button collapsed rounded-top" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#divMainList" aria-expanded="false" aria-controls="divMainList">
-                        首頁
-                    </button>
-                </h2>
-                <div id="divMainList" class="accordion-collapse collapse" aria-labelledby="descHomePage" data-bs-parent="#divSidebar">
-                    <div class="accordion-body p-0 list-group">
-                        <button class="w-100 rounded list-group-item text-start">ShinyColorsDB</button>
-                        <button class="w-100 rounded list-group-item text-start">最新情報</button>
-                        <button class="w-100 rounded list-group-item text-start">無限期招募前端大師= =</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accordion-item overflow-auto">
-                <h2 class="accordion-header" id="descUnit">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#divIdolUnitList"
-                        aria-expanded="true" aria-controls="divIdolUnitList">
-                        角色列表
-                    </button>
-                </h2>
-                
-                <div class="accordion-collapse collapse show" id="divIdolUnitList" aria-labelledby="descUnit" data-bs-parent="#divSidebar">
-                    <% for(let i=0; i < IdolList.length; i++) { %>
-                        <button href="#" class="list-group-item w-100 text-start" data-bs-toggle="collapse" data-bs-target=<%=`#unit${i + 1}` %>
-                            style="background-color: <%= IdolList[i].UnitColor %>">
-                            <img src="https://static.shinycolors.moe/pictures/unitIcon/00<%= i + 1 %>.png"
-                                width="20" height="20" alt="">
-                            <%= IdolList[i].UnitName %>
-                        </button>
-                        <div class="list-group <% if(i + 1 != IdolInfo.UnitID) { %> collapse <% } %>" id=<%=`unit${i + 1}` %>>
-                            <% for(let k=0; k < IdolList[i].Idols.length; k++) { %>
-                            <a href=<%=`/info/IdolInfo?IdolID=${IdolList[i].Idols[k].IdolID}` %>
-                                class="
-                                <% if(IdolList[i].Idols[k].IdolID==IdolInfo.IdolID) { %>
-                                    active
-                                <% } %> ps-4 list-group-item-action list-group-item">
-                                <img src="https://static.shinycolors.moe/pictures/smlIcon/<% if(IdolList[i].Idols[k].IdolID < 10) { %>0<%=IdolList[i].Idols[k].IdolID%><% } else { %><%=IdolList[i].Idols[k].IdolID%><% } %>.png"
-                                    width="40" height="40" alt="" class="d-inline-block">
-                                <h6 class="d-inline-block">
-                                    <%= IdolList[i].Idols[k].IdolName %>
-                                </h6>
-                            </a>
-                            <% } %>
-                        </div>
-                    <% } %>
-                </div>
-            </div>
-            <a href="https://spine.shinycolors.moe"
-                class="p-2 bg-light text-dark rounded-bottom">服裝Live2d~~</a>
-        </div>
-        <div class="col-10 pt-3 ps-2 overflow-auto">
+        <%- include ("../partials/header.ejs") %>
+        <div class="col-md-10 pt-3 ps-2 overflow-auto">
             <h2>
                 <%= CardInfo.CardName %>
             </h2>
             <div class="row col-12">
-                <div class="col-5 p-0 d-inline carousel carousel-dark" data-bs-ride="carousel" data-bs-interval="5000"> <!---->                    
+                <div class="col-md-5 p-0 d-inline carousel carousel-dark" data-bs-ride="carousel" data-bs-interval="5000"> <!---->                    
                     <div class="carousel-inner">
                         <img src="https://static.shinycolors.moe/pictures/bigPic/<%= CardInfo.BigPic1 %>.jpg" alt=""
                                 class="img-fluid ps-3 carousel-item active">
@@ -115,7 +61,7 @@
                         
                     </div>
                 </div>
-                <div class="col-7 p-0 d-inline">
+                <div class="col-md-7 p-0 d-inline">
                     <div class="ps-3">
                         稀有度: <%= CardInfo.CardType %> <br>
                         實裝日期: <%= CardInfo.ReleaseDate %> <br>
@@ -155,8 +101,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 row pt-4">
-                <div class="grid col-5">
+            <div class="col-md-12 row pt-4">
+                <div class="grid col-md-5">
                     <ul id="hexGrid">
                         <li class="hex">
                             <div class="hexIn">

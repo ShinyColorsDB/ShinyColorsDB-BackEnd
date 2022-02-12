@@ -22,6 +22,10 @@ info.get("/IdolInfo", async (req, res, next) => {
     });
 });
 
+
+
+// random name 
+
 info.get("/PCardInfo", async (req, res, next) => {
     //res.redirect("./IdolInfo?IdolID=1");
     //return;

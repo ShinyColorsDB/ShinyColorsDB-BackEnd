@@ -3,7 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-
+let partials = require('express-partials')
 const spineRouter = require('./routes/api/spines.js');
 const generalRouter = require('./routes/api/general.js');
 const infoRouter = require('./routes/info/info.js');
@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use('/static', express.static(__dirname + '/static'));
-
+app.use(partials())
 app.use("/spines", spineRouter);
 app.use("/general", generalRouter);
 app.use("/info", infoRouter);
