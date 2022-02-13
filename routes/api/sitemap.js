@@ -9,6 +9,7 @@ sitemap.get("/", async (_, res) => {
     const idolSiteMap = await getIdolSiteMap(), 
         cardSiteMap = await getCardSiteMap();
     sitemap = sitemap.concat(idolSiteMap, cardSiteMap, `</urlset>`);
+    res.type('text/xml');
     res.send(sitemap);
 });
 
