@@ -78,7 +78,9 @@
                             <tbody> 
                                 <% CardIdolEvents.forEach(e => { %>
                                 <tr>
-                                    <td><%= e.EventTitle %></td>
+                                    <td>
+                                        <a href="https://event.shinycolors.moe?eventId=<%= e.EventID %>"><%= e.EventTitle %></a>
+                                    </td>
                                 </tr>
                                 <% }) %>
                             </tbody>
@@ -93,7 +95,11 @@
                             </thead>
                             <tbody> 
                                 <tr>
-                                    <td><%=TrueEnd.EventTitle%></td>
+                                    <td>
+                                        <a href="https://event.shinycolors.moe?eventId=<%= e.EventID %>">
+                                            <%=TrueEnd.EventTitle%>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
